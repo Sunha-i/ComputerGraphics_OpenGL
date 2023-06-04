@@ -10,13 +10,13 @@
 #pragma warning(disable:4996)
 #define BLOCK 4
 #define READ_SIZE 110404//5060//110404
-#define scale 20
+#define scale 30
 //#define TEST 14989
 //#define STATIC_
 
 using namespace std;
 
-struct Vertex{
+struct Vertex {
 	float X;
 	float Y;
 	float Z;
@@ -62,15 +62,15 @@ float zmin = 100000, zmax = -100000;
 
 int side_status[50] = { 0 };
 
-float quat[4] = {0};
-float t[3] = {0};
+float quat[4] = { 0 };
+float t[3] = { 0 };
 
 Vertex skt[23];
 BOOLEAN bTracked = false;
 bool checkt = false;
-Vertex *vertex;
-Vertex *vertex_color;
-MMesh *mymesh;
+Vertex* vertex;
+Vertex* vertex_color;
+MMesh* mymesh;
 
 bool recheck;
 
@@ -109,12 +109,12 @@ void vzero(float*);
 void vset(float*, float, float, float);
 void vsub(const float*, const float*, float*);
 void vcopy(const float*, float*);
-void vcross(const float *v1, const float *v2, float *cross);
-float vlength(const float *v);
-void vscale(float *v, float div);
-void vnormal(float *v);
-float vdot(const float *v1, const float *v2);
-void vadd(const float *src1, const float *src2, float *dst);
+void vcross(const float* v1, const float* v2, float* cross);
+float vlength(const float* v);
+void vscale(float* v, float div);
+void vnormal(float* v);
+float vdot(const float* v1, const float* v2);
+void vadd(const float* src1, const float* src2, float* dst);
 
 void trackball(float q[4], float, float, float, float);
 //void add_quats(float*, float*, float*);
@@ -129,3 +129,11 @@ void Setskt();
 
 //CameraSpacePoint m_SpacePoint[JointType::JointType_Count];
 void Track();
+
+
+
+// myheader
+float box_min = 100000, box_max = -100000;
+int myscale;	// vertex의 값들을 정규화 (box의 max line의 크기가 1이 되도록, 위치는 고려안됨)
+void LoadObj(const char* filepath);
+

@@ -152,7 +152,7 @@ void mouse(int button, int state, int x, int y)
 		}
 		else if (button == 3 || button == 4)
 		{
-			const float sign = (static_cast<float>(button)-3.5f) * 2.0f;
+			const float sign = (static_cast<float>(button) - 3.5f) * 2.0f;
 			t[2] -= sign * 500 * 0.00015f;
 		}
 	}
@@ -175,21 +175,21 @@ void vset(float* v, float x, float y, float z)
 	v[2] = z;
 }
 
-void vsub(const float *src1, const float *src2, float *dst)
+void vsub(const float* src1, const float* src2, float* dst)
 {
 	dst[0] = src1[0] - src2[0];
 	dst[1] = src1[1] - src2[1];
 	dst[2] = src1[2] - src2[2];
 }
 
-void vcopy(const float *v1, float *v2)
+void vcopy(const float* v1, float* v2)
 {
 	register int i;
 	for (i = 0; i < 3; i++)
 		v2[i] = v1[i];
 }
 
-void vcross(const float *v1, const float *v2, float *cross)
+void vcross(const float* v1, const float* v2, float* cross)
 {
 	float temp[3];
 
@@ -199,29 +199,29 @@ void vcross(const float *v1, const float *v2, float *cross)
 	vcopy(temp, cross);
 }
 
-float vlength(const float *v)
+float vlength(const float* v)
 {
 	return sqrt(v[0] * v[0] + v[1] * v[1] + v[2] * v[2]);
 }
 
-void vscale(float *v, float div)
+void vscale(float* v, float div)
 {
 	v[0] *= div;
 	v[1] *= div;
 	v[2] *= div;
 }
 
-void vnormal(float *v)
+void vnormal(float* v)
 {
 	vscale(v, 1.0f / vlength(v));
 }
 
-float vdot(const float *v1, const float *v2)
+float vdot(const float* v1, const float* v2)
 {
 	return v1[0] * v2[0] + v1[1] * v2[1] + v1[2] * v2[2];
 }
 
-void vadd(const float *src1, const float *src2, float *dst)
+void vadd(const float* src1, const float* src2, float* dst)
 {
 	dst[0] = src1[0] + src2[0];
 	dst[1] = src1[1] + src2[1];
@@ -258,7 +258,7 @@ void trackball(float q[4], float p1x, float p1y, float p2x, float p2y)
 	 *  Figure out how much to rotate around that axis.
 	 */
 	vsub(p1, p2, d);
-	t = vlength(d) / (2.0f*TRACKBALLSIZE);
+	t = vlength(d) / (2.0f * TRACKBALLSIZE);
 
 	/*
 	 * Avoid problems with out-of-control values...
@@ -282,13 +282,13 @@ float tb_project_to_sphere(float r, float x, float y)
 {
 	float d, t, z;
 
-	d = sqrt(x*x + y*y);
+	d = sqrt(x * x + y * y);
 	if (d < r * 0.70710678118654752440f) {    /* Inside sphere */
-		z = sqrt(r*r - d*d);
+		z = sqrt(r * r - d * d);
 	}
 	else {           /* On hyperbola */
 		t = r / 1.41421356237309504880f;
-		z = t*t / d;
+		z = t * t / d;
 	}
 	return z;
 }
@@ -333,7 +333,7 @@ void InitializeWindow(int argc, char* argv[])
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH);
 	glutInitWindowSize(1000 / 2, 1000 / 2);
 
-	glutInitWindowPosition(0, 0);
+	glutInitWindowPosition(1000, 500);
 
 	dispWindowIndex = glutCreateWindow("3D Model");
 
@@ -347,7 +347,7 @@ void InitializeWindow(int argc, char* argv[])
 	glutMouseFunc(mouse);
 	glutCloseFunc(close);
 	//GLuint image = load   ("./my_texture.bmp");
-	
+
 	//glBindTexture(1,)
 
 	glutSetOption(GLUT_ACTION_ON_WINDOW_CLOSE, GLUT_ACTION_GLUTMAINLOOP_RETURNS);
@@ -370,10 +370,10 @@ void display()
 	glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 	glMatrixMode(GL_PROJECTION);
 	glLoadIdentity();
-	gluPerspective(60, 1, 0.1, 200);		
+	gluPerspective(60, 1, 0.1, 200);
 	glTranslatef(t[0], t[1], t[2] - 1.0f);
-	glScalef(1, 1, 1);	
-	GLfloat m[4][4],m1[4][4];
+	glScalef(1, 1, 1);
+	GLfloat m[4][4], m1[4][4];
 	build_rotmatrix(m, quat);
 	gluLookAt(0, 2.0, 2.0, 0, 0, 0, 0, 1.0, 0);
 
@@ -388,17 +388,17 @@ void display()
 	GLfloat specular0[4] = { 1.0, 1.0, 1.0, 1.0 };
 	GLfloat light0_pos[4] = { 2.0, 2.0, 2.0, 1.0 };
 
-	glLightfv(GL_LIGHT0, GL_POSITION, light0_pos); 
+	glLightfv(GL_LIGHT0, GL_POSITION, light0_pos);
 	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient0);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse0);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, specular0);
-	
+
 
 	glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 0.2);
 	glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.1);
 	glLightf(GL_LIGHT0, GL_QUADRATIC_ATTENUATION, 0.05);
 
-	
+
 	//빨간색 플라스틱과 유사한 재질을 다음과 같이 정의
 	GLfloat mat_ambient[4] = { 0.8f, 0.8f, 0.8f, 1.0f };
 	GLfloat mat_diffuse[4] = { 0.6f, 0.6f, 0.6f, 1.0f };
@@ -410,29 +410,29 @@ void display()
 	glMaterialfv(GL_FRONT, GL_DIFFUSE, mat_diffuse);
 	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
 	glMaterialf(GL_FRONT, GL_SHININESS, mat_shininess);
-	
-	
 
+	// Flat Shading 추가
+	glShadeModel(GL_FLAT);
 
 	glTexImage2D(GL_TEXTURE_2D, 0, 3, 2048, 2048, 0, GL_RGB, GL_UNSIGNED_BYTE, mytexels);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER,GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER,GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
 	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-		
-		
+
+
 	glEnable(GL_TEXTURE_2D);
 	glBegin(GL_QUADS);
-	for (int jj = 0; jj <6733; jj = jj + 1)
+	for (int jj = 0; jj < 6733; jj = jj + 1)
 	{
-		glTexCoord2d(vertex_color[mymesh[jj].T1-1].X, vertex_color[mymesh[jj].T1 - 1].Y);
+		//glTexCoord2d(vertex_color[mymesh[jj].T1 - 1].X, vertex_color[mymesh[jj].T1 - 1].Y);
 		glVertex3f(vertex[mymesh[jj].V1 - 1].X, vertex[mymesh[jj].V1 - 1].Y, vertex[mymesh[jj].V1 - 1].Z);
-		glTexCoord2d(vertex_color[mymesh[jj].T2 - 1].X, vertex_color[mymesh[jj].T2 - 1].Y);
+		//glTexCoord2d(vertex_color[mymesh[jj].T2 - 1].X, vertex_color[mymesh[jj].T2 - 1].Y);
 		glVertex3f(vertex[mymesh[jj].V2 - 1].X, vertex[mymesh[jj].V2 - 1].Y, vertex[mymesh[jj].V2 - 1].Z);
-		glTexCoord2d(vertex_color[mymesh[jj].T3 - 1].X, vertex_color[mymesh[jj].T3 - 1].Y);
+		//TexCoord2d(vertex_color[mymesh[jj].T3 - 1].X, vertex_color[mymesh[jj].T3 - 1].Y);
 		glVertex3f(vertex[mymesh[jj].V3 - 1].X, vertex[mymesh[jj].V3 - 1].Y, vertex[mymesh[jj].V3 - 1].Z);
-		glTexCoord2d(vertex_color[mymesh[jj].T4 - 1].X, vertex_color[mymesh[jj].T4 - 1].Y);
+		//glTexCoord2d(vertex_color[mymesh[jj].T4 - 1].X, vertex_color[mymesh[jj].T4 - 1].Y);
 		glVertex3f(vertex[mymesh[jj].V4 - 1].X, vertex[mymesh[jj].V4 - 1].Y, vertex[mymesh[jj].V4 - 1].Z);
 	}
 	glEnd();
@@ -441,17 +441,63 @@ void display()
 	glutSwapBuffers();
 }
 
+
+/*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
+  Function: LoadObj(const char* filepath)
+
+  Summary: read v, vt, f
+		   & save to vertex, vertex_color, mymesh structure
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
+void LoadObj(const char* filepath)
+{
+	FILE* fp;
+	fp = fopen(filepath, "r");
+
+	int count = 0;
+	int num = 0;
+	char ch;
+	float x, y, z;
+	float x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4;
+
+	for (int j = 0; j < 100000; j = j + 1)
+	{
+		count = fscanf(fp, "v %f %f %f /n", &x, &y, &z);
+		if (count == 3)
+		{
+			if (x < box_min)
+				box_min = x;
+			if (x > box_max)
+				box_max = x;
+			if (y < box_min)
+				box_min = y;
+			if (y > box_max)
+				box_max = y;
+			if (z < box_min)
+				box_min = z;
+			if (z > box_max)
+				box_max = z;
+		}
+		else
+			break;
+	}
+	fclose(fp);
+	
+}
+/*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
+
+
+
 int main(int argc, char* argv[])
 {
 	vertex = new Vertex[100000];
 	vertex_color = new Vertex[100000];
 	mymesh = new MMesh[100000];
-	
-	int i,j,k=0;
-	FILE* f = fopen("applet.bmp", "rb");
+
+	int i, j, k = 0;
+	FILE* f = fopen("assets/apple/applet.bmp", "rb");
 	unsigned char info[54];
 	fread(info, sizeof(unsigned char), 54, f); // read the 54-byte header
-											   // extract image height and width from header
+	// extract image height and width from header
 	int width = *(int*)&info[18];
 	int height = *(int*)&info[22];
 
@@ -459,8 +505,8 @@ int main(int argc, char* argv[])
 	unsigned char* data = new unsigned char[size]; // allocate 3 bytes per pixel
 	fread(data, sizeof(unsigned char), size, f); // read the rest of the data at once
 	fclose(f);
-	for (i = 0; i < width; i ++)
-		for (j = 0; j < height; j ++)
+	for (i = 0; i < width; i++)
+		for (j = 0; j < height; j++)
 		{
 			mytexels[j][i][0] = data[k * 3 + 2];
 			mytexels[j][i][1] = data[k * 3 + 1];
@@ -468,25 +514,26 @@ int main(int argc, char* argv[])
 			k++;
 		}
 
+	LoadObj("assets/apple/apple.obj");
+
+	myscale = box_max - box_min;
+	
 	FILE* fp;
-	fp = fopen("apple.obj", "r");
 	int count = 0;
 	int num = 0;
 	char ch;
 	float x, y, z;
+	//fp = fopen("assets/snowman/NightMare.obj", "r");
+	fp = fopen("assets/apple/apple.obj", "r");
 
 	for (j = 0; j < 100000; j = j + 1)
 	{
-		count = fscanf(fp, "v %f %f %f /n",&x, &y, &z);
-		if (count == 3 )
+		count = fscanf(fp, "v %f %f %f /n", &x, &y, &z);
+		if (count == 3)
 		{
-			vertex[j].X = x / scale;
-			vertex[j].Y = y / scale;
-			vertex[j].Z = z / scale;
-			if (vertex[j].Z < zmin)
-				zmin = vertex[j].Z;
-			if (vertex[j].Z > zmax)
-				zmax = vertex[j].Z;
+			vertex[j].X = x / myscale;
+			vertex[j].Y = y / myscale;
+			vertex[j].Z = z / myscale;
 		}
 		else
 			break;
@@ -494,8 +541,8 @@ int main(int argc, char* argv[])
 	fclose(fp);
 
 
-	fp = fopen("applet.txt", "r");
-	
+	fp = fopen("assets/apple/applet.txt", "r");
+
 	for (j = 0; j < 100000; j = j + 1)
 	{
 		count = fscanf(fp, "vt %f %f %f /n", &x, &y, &z);
@@ -511,13 +558,13 @@ int main(int argc, char* argv[])
 	fclose(fp);
 
 	FILE* fpp;
-	fpp = fopen("applef2.txt", "r");
+	fpp = fopen("assets/apple/applef2.txt", "r");
 	float x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4;
 
 	for (j = 0; j < 100000; j = j + 1)
 	{
 		count = fscanf(fp, "f %f/%f/%f %f/%f/%f %f/%f/%f %f/%f/%f /n", &x1, &y1, &z1, &x2, &y2, &z2, &x3, &y3, &z3, &x4, &y4, &z4);
-		if (count == 12 )
+		if (count == 12)
 		{
 			mymesh[j].V1 = x1;
 			mymesh[j].V2 = x2;
@@ -532,7 +579,7 @@ int main(int argc, char* argv[])
 			break;
 	}
 	fclose(fpp);
-	
+
 
 	InitializeWindow(argc, argv);
 
