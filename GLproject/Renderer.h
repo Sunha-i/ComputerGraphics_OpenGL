@@ -133,7 +133,22 @@ void Track();
 
 
 // myheader
-float box_min = 100000, box_max = -100000;
-int myscale;	// vertex의 값들을 정규화 (box의 max line의 크기가 1이 되도록, 위치는 고려안됨)
-void LoadObj(const char* filepath);
+#define max(a,b)  (((a) > (b)) ? (a) : (b))
+#define min(a,b)  (((a) < (b)) ? (a) : (b))
 
+float x_min = 100000, x_max = -100000;
+float y_min = 100000, y_max = -100000;
+float z_min = 100000, z_max = -100000;
+
+int num_vertices;
+int myobject;
+int myscale;	// vertex의 값들을 정규화 (box의 max line의 크기가 1이 되도록, 위치는 고려안됨)
+void LoadObj(const char* filepath, int move_x=0, int move_y=0, int move_z=0);
+void LoadObj2(const char* filepath, int move_x = 0, int move_y = 0, int move_z = 0);
+
+// 일단 정규화를 하면서 위치까지 조정되도록..
+// 예를 들어 100*30*40, 2*3*5 인 물체가 있다고 해보자 (이건 fitting box 기준 크기)
+
+Vertex* vertex2;
+Vertex* vertex_color2;
+MMesh* mymesh2;

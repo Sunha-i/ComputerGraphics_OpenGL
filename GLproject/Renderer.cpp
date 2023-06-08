@@ -424,17 +424,18 @@ void display()
 
 	glEnable(GL_TEXTURE_2D);
 	glBegin(GL_QUADS);
-	for (int jj = 0; jj < 6733; jj = jj + 1)
+	for (int jj = 0; jj < 20000; jj = jj + 1)
 	{
 		//glTexCoord2d(vertex_color[mymesh[jj].T1 - 1].X, vertex_color[mymesh[jj].T1 - 1].Y);
 		glVertex3f(vertex[mymesh[jj].V1 - 1].X, vertex[mymesh[jj].V1 - 1].Y, vertex[mymesh[jj].V1 - 1].Z);
 		//glTexCoord2d(vertex_color[mymesh[jj].T2 - 1].X, vertex_color[mymesh[jj].T2 - 1].Y);
 		glVertex3f(vertex[mymesh[jj].V2 - 1].X, vertex[mymesh[jj].V2 - 1].Y, vertex[mymesh[jj].V2 - 1].Z);
-		//TexCoord2d(vertex_color[mymesh[jj].T3 - 1].X, vertex_color[mymesh[jj].T3 - 1].Y);
+		//glTexCoord2d(vertex_color[mymesh[jj].T3 - 1].X, vertex_color[mymesh[jj].T3 - 1].Y);
 		glVertex3f(vertex[mymesh[jj].V3 - 1].X, vertex[mymesh[jj].V3 - 1].Y, vertex[mymesh[jj].V3 - 1].Z);
 		//glTexCoord2d(vertex_color[mymesh[jj].T4 - 1].X, vertex_color[mymesh[jj].T4 - 1].Y);
 		glVertex3f(vertex[mymesh[jj].V4 - 1].X, vertex[mymesh[jj].V4 - 1].Y, vertex[mymesh[jj].V4 - 1].Z);
 	}
+	
 	glEnd();
 
 
@@ -446,17 +447,22 @@ void display()
   Function: LoadObj(const char* filepath)
 
   Summary: read v, vt, f
+		   & count vertex, find vertex range
 		   & save to vertex, vertex_color, mymesh structure
+
+  Return: ...
 -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
-void LoadObj(const char* filepath)
+void LoadObj(const char* filepath, int move_x, int move_y, int move_z)
 {
 	FILE* fp;
 	fp = fopen(filepath, "r");
 
+	num_vertices = 0;
 	int count = 0;
 	int num = 0;
 	char ch;
-	float x, y, z;
+	float x, y, z; 
+	float tmp_x, tmp_y, tmp_z;
 	float x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4;
 
 	for (int j = 0; j < 100000; j = j + 1)
@@ -464,27 +470,86 @@ void LoadObj(const char* filepath)
 		count = fscanf(fp, "v %f %f %f /n", &x, &y, &z);
 		if (count == 3)
 		{
-			if (x < box_min)
-				box_min = x;
-			if (x > box_max)
-				box_max = x;
-			if (y < box_min)
-				box_min = y;
-			if (y > box_max)
-				box_max = y;
-			if (z < box_min)
-				box_min = z;
-			if (z > box_max)
-				box_max = z;
+			if (x < x_min)
+				x_min = x;
+			if (x > x_max)
+				x_max = x;
+			if (y < y_min)
+				y_min = y;
+			if (y > y_max)
+				y_max = y;
+			if (z < z_min)
+				z_min = z;
+			if (z > z_max)
+				z_max = z;
+
+			num_vertices += 3;
+		}
+		else
+			break;
+	}
+	fclose(fp);
+
+	myscale = max(max(x_max - x_min, y_max - y_min), z_max - z_min);
+
+	fp = fopen(filepath, "r");
+
+	for (int j = 0; j < 100000; j = j + 1)
+	{
+		count = fscanf(fp, "v %f %f %f /n", &x, &y, &z);
+		if (count == 3)
+		{
+			tmp_x = x - x_min;
+			tmp_y = y - y_min;
+			tmp_z = z - z_min;
+			vertex[j].X = tmp_x / myscale + move_x;
+			vertex[j].Y = tmp_y / myscale + move_y;
+			vertex[j].Z = tmp_z / myscale + move_z;
 		}
 		else
 			break;
 	}
 	fclose(fp);
 	
+	fp = fopen("assets/apple/applet.txt", "r");
+
+	for (int j = 0; j < 100000; j = j + 1)
+	{
+		count = fscanf(fp, "vt %f %f %f /n", &x, &y, &z);
+		if (count == 3)
+		{
+			vertex_color[j].X = x;
+			vertex_color[j].Y = y;
+			vertex_color[j].Z = z;
+		}
+		else
+			break;
+	}
+	fclose(fp);
+
+	FILE* fpp;
+	fpp = fopen("assets/snowman/NightMare_f.txt", "r");
+
+	for (int j = 0; j < 100000; j = j + 1)
+	{
+		count = fscanf(fpp, "f %f/%f/%f %f/%f/%f %f/%f/%f %f/%f/%f /n", &x1, &y1, &z1, &x2, &y2, &z2, &x3, &y3, &z3, &x4, &y4, &z4);
+		if (count == 12)
+		{
+			mymesh[j].V1 = x1;
+			mymesh[j].V2 = x2;
+			mymesh[j].V3 = x3;
+			mymesh[j].V4 = x4;
+			mymesh[j].T1 = y1;
+			mymesh[j].T2 = y2;
+			mymesh[j].T3 = y3;
+			mymesh[j].T4 = y4;
+		}
+		else
+			break;
+	}
+	fclose(fpp);
 }
 /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
-
 
 
 int main(int argc, char* argv[])
@@ -514,72 +579,10 @@ int main(int argc, char* argv[])
 			k++;
 		}
 
-	LoadObj("assets/apple/apple.obj");
-
-	myscale = box_max - box_min;
-	
-	FILE* fp;
-	int count = 0;
-	int num = 0;
-	char ch;
-	float x, y, z;
 	//fp = fopen("assets/snowman/NightMare.obj", "r");
-	fp = fopen("assets/apple/apple.obj", "r");
-
-	for (j = 0; j < 100000; j = j + 1)
-	{
-		count = fscanf(fp, "v %f %f %f /n", &x, &y, &z);
-		if (count == 3)
-		{
-			vertex[j].X = x / myscale;
-			vertex[j].Y = y / myscale;
-			vertex[j].Z = z / myscale;
-		}
-		else
-			break;
-	}
-	fclose(fp);
-
-
-	fp = fopen("assets/apple/applet.txt", "r");
-
-	for (j = 0; j < 100000; j = j + 1)
-	{
-		count = fscanf(fp, "vt %f %f %f /n", &x, &y, &z);
-		if (count == 3)
-		{
-			vertex_color[j].X = x;
-			vertex_color[j].Y = y;
-			vertex_color[j].Z = z;
-		}
-		else
-			break;
-	}
-	fclose(fp);
-
-	FILE* fpp;
-	fpp = fopen("assets/apple/applef2.txt", "r");
-	float x1, y1, z1, x2, y2, z2, x3, y3, z3, x4, y4, z4;
-
-	for (j = 0; j < 100000; j = j + 1)
-	{
-		count = fscanf(fp, "f %f/%f/%f %f/%f/%f %f/%f/%f %f/%f/%f /n", &x1, &y1, &z1, &x2, &y2, &z2, &x3, &y3, &z3, &x4, &y4, &z4);
-		if (count == 12)
-		{
-			mymesh[j].V1 = x1;
-			mymesh[j].V2 = x2;
-			mymesh[j].V3 = x3;
-			mymesh[j].V4 = x4;
-			mymesh[j].T1 = y1;
-			mymesh[j].T2 = y2;
-			mymesh[j].T3 = y3;
-			mymesh[j].T4 = y4;
-		}
-		else
-			break;
-	}
-	fclose(fpp);
-
+	
+	//LoadObj("assets/apple/apple.obj");
+	LoadObj("assets/snowman/NightMare_v.obj");
 
 	InitializeWindow(argc, argv);
 
