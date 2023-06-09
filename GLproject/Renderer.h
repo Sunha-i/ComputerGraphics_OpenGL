@@ -123,7 +123,7 @@ void normalize_quat(float q[4]);
 float tb_project_to_sphere(float, float, float);
 void build_rotmatrix(float m[4][4], float q[4]);
 void Reader();
-void DrawObj();
+//void DrawObj();
 void DrawMeshObj();
 void Setskt();
 
@@ -141,9 +141,13 @@ float y_min = 100000, y_max = -100000;
 float z_min = 100000, z_max = -100000;
 
 int num_vertices;
+int num_faces[2];
+
 int myobject;
 int myscale;	// vertex의 값들을 정규화 (box의 max line의 크기가 1이 되도록, 위치는 고려안됨)
-void LoadObj(const char* filepath, int move_x=0, int move_y=0, int move_z=0);
+void LoadObj(const char* filepath, int move_x = 0, int move_y = 0, int move_z = 0);
+void DrawObj(int idx);
+void NewLoadObj(int idx, const char* filepath, int move_x = 0, int move_y = 0, int move_z = 0);
 void LoadObj2(const char* filepath, int move_x = 0, int move_y = 0, int move_z = 0);
 
 // 일단 정규화를 하면서 위치까지 조정되도록..
@@ -152,3 +156,6 @@ void LoadObj2(const char* filepath, int move_x = 0, int move_y = 0, int move_z =
 Vertex* vertex2;
 Vertex* vertex_color2;
 MMesh* mymesh2;
+
+Vertex** vertexArray;
+MMesh** mymeshArray;

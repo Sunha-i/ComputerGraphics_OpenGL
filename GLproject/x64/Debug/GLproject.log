@@ -7,14 +7,14 @@ C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(376,
 C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(380,16): warning C4101: 'b' :참조되지 않은 지역 변수입니다.
 C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(380,13): warning C4101: 'g' :참조되지 않은 지역 변수입니다.
 C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(380,10): warning C4101: 'r' :참조되지 않은 지역 변수입니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(493,12): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(538,19): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(539,19): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(540,19): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(541,19): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(542,19): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(543,19): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(544,19): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(545,19): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(463,7): warning C4101: 'ch' :참조되지 않은 지역 변수입니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(529,12): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(573,37): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(574,37): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(575,37): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(576,37): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(577,37): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(578,37): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(579,37): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(580,37): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(486,7): warning C4101: 'ch' :참조되지 않은 지역 변수입니다.
   GLproject.vcxproj -> C:\Users\Sun\source\repos\ComputerGraphics\GLproject\x64\Debug\GLproject.exe
