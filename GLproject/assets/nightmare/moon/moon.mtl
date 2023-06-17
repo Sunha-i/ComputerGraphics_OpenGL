@@ -1,0 +1,8 @@
+newmtl mymoon
+Ka 0 0 0
+Kd 1 1 1
+Ke 0 0 0
+illum 2
+d 1
+Tr 0
+map_Kd moon_texture.jpg

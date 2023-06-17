@@ -425,7 +425,7 @@ void display()
 	glEnable(GL_TEXTURE_2D);
 	glBegin(GL_QUADS);
 
-	for (int i = 0; i < 2; i++)
+	for (int i = 0; i < 1; i++)
 	{
 		DrawObj(i);
 	}
@@ -448,14 +448,15 @@ void DrawObj(int idx)
 {
 	for (int jj = 0; jj < num_faces[idx]; jj = jj + 1)
 	{
-		//glTexCoord2d(vertex_color[mymesh[jj].T1 - 1].X, vertex_color[mymesh[jj].T1 - 1].Y);
-		glVertex3f(vertexArray[idx][mymeshArray[idx][jj].V1 - 1].X, vertexArray[idx][mymeshArray[idx][jj].V1 - 1].Y, vertexArray[idx][mymeshArray[idx][jj].V1 - 1].Z);
-		//glTexCoord2d(vertex_color[mymesh[jj].T2 - 1].X, vertex_color[mymesh[jj].T2 - 1].Y);
-		glVertex3f(vertexArray[idx][mymeshArray[idx][jj].V2 - 1].X, vertexArray[idx][mymeshArray[idx][jj].V2 - 1].Y, vertexArray[idx][mymeshArray[idx][jj].V2 - 1].Z);
-		//glTexCoord2d(vertex_color[mymesh[jj].T3 - 1].X, vertex_color[mymesh[jj].T3 - 1].Y);
-		glVertex3f(vertexArray[idx][mymeshArray[idx][jj].V3 - 1].X, vertexArray[idx][mymeshArray[idx][jj].V3 - 1].Y, vertexArray[idx][mymeshArray[idx][jj].V3 - 1].Z);
-		//glTexCoord2d(vertex_color[mymesh[jj].T4 - 1].X, vertex_color[mymesh[jj].T4 - 1].Y);
-		glVertex3f(vertexArray[idx][mymeshArray[idx][jj].V4 - 1].X, vertexArray[idx][mymeshArray[idx][jj].V4 - 1].Y, vertexArray[idx][mymeshArray[idx][jj].V4 - 1].Z);
+		glTexCoord2d(vcolorArr[idx][mymeshArr[idx][jj].T1 - 1].X, vcolorArr[idx][mymeshArr[idx][jj].T1 - 1].Y);
+		glVertex3f(vertexArr[idx][mymeshArr[idx][jj].V1 - 1].X, vertexArr[idx][mymeshArr[idx][jj].V1 - 1].Y, vertexArr[idx][mymeshArr[idx][jj].V1 - 1].Z);
+		glTexCoord2d(vcolorArr[idx][mymeshArr[idx][jj].T2 - 1].X, vcolorArr[idx][mymeshArr[idx][jj].T2 - 1].Y);
+		glVertex3f(vertexArr[idx][mymeshArr[idx][jj].V2 - 1].X, vertexArr[idx][mymeshArr[idx][jj].V2 - 1].Y, vertexArr[idx][mymeshArr[idx][jj].V2 - 1].Z);
+		glTexCoord2d(vcolorArr[idx][mymeshArr[idx][jj].T3 - 1].X, vcolorArr[idx][mymeshArr[idx][jj].T3 - 1].Y);
+		glVertex3f(vertexArr[idx][mymeshArr[idx][jj].V3 - 1].X, vertexArr[idx][mymeshArr[idx][jj].V3 - 1].Y, vertexArr[idx][mymeshArr[idx][jj].V3 - 1].Z);
+		glTexCoord2d(vcolorArr[idx][mymeshArr[idx][jj].T4 - 1].X, vcolorArr[idx][mymeshArr[idx][jj].T4 - 1].Y);
+		if (mymeshArr[idx][jj].V4)
+			glVertex3f(vertexArr[idx][mymeshArr[idx][jj].V4 - 1].X, vertexArr[idx][mymeshArr[idx][jj].V4 - 1].Y, vertexArr[idx][mymeshArr[idx][jj].V4 - 1].Z);
 	}
 }
 
@@ -481,6 +482,7 @@ void NewLoadObj(int idx, const char* filepath, int move_x, int move_y, int move_
 	y_min = 100000, y_max = -100000;
 	z_min = 100000, z_max = -100000;
 
+	int tmp;
 	int count = 0;
 	int num = 0;
 	char ch;
@@ -525,7 +527,7 @@ void NewLoadObj(int idx, const char* filepath, int move_x, int move_y, int move_
 			break;*/
 	}
 	fclose(fp);
-
+	
 	myscale = max(max(x_max - x_min, y_max - y_min), z_max - z_min);
 
 	fp = fopen(filepath, "r");
@@ -546,38 +548,45 @@ void NewLoadObj(int idx, const char* filepath, int move_x, int move_y, int move_
 				tmp_x = x - x_min;
 				tmp_y = y - y_min;
 				tmp_z = z - z_min;
-				vertexArray[idx][idx_vtx].X = tmp_x / myscale + move_x;
-				vertexArray[idx][idx_vtx].Y = tmp_y / myscale + move_y;
-				vertexArray[idx][idx_vtx].Z = tmp_z / myscale + move_z;
+				vertexArr[idx][idx_vtx].X = tmp_x / myscale + move_x;
+				vertexArr[idx][idx_vtx].Y = tmp_y / myscale + move_y;
+				vertexArr[idx][idx_vtx].Z = tmp_z / myscale + move_z;
 
 				idx_vtx++;
 			}
+			if (idx_vtx) {};
 		}
+		
 		else if (strcmp(lineHeader, "vt") == 0)
 		{
-			count = fscanf(fp, "%f %f %f /n", &x, &y, &z);
-			if (count == 3)
+			count = fscanf(fp, "%f %f /n", &x, &y);
+			if (count == 2)
 			{
-				vertex_color[idx_vtxc].X = x;
-				vertex_color[idx_vtxc].Y = y;
-				vertex_color[idx_vtxc].Z = z;
+				vcolorArr[idx][idx_vtxc].X = x;
+				vcolorArr[idx][idx_vtxc].Y = y;
+				vcolorArr[idx][idx_vtxc].Z = 0.000000;
 
 				idx_vtxc++;
 			}
+			if (idx_vtxc) {};
 		}
+
 		else if (strcmp(lineHeader, "f") == 0)
 		{
+			// v/vt/vn
+			x4 = 0, y4 = 0, z4 = 0;
 			count = fscanf(fp, "%f/%f/%f %f/%f/%f %f/%f/%f %f/%f/%f /n", &x1, &y1, &z1, &x2, &y2, &z2, &x3, &y3, &z3, &x4, &y4, &z4);
-			if (count == 12)
+
+			if (count >= 9)
 			{
-				mymeshArray[idx][idx_mesh].V1 = x1;
-				mymeshArray[idx][idx_mesh].V2 = x2;
-				mymeshArray[idx][idx_mesh].V3 = x3;
-				mymeshArray[idx][idx_mesh].V4 = x4;
-				mymeshArray[idx][idx_mesh].T1 = y1;
-				mymeshArray[idx][idx_mesh].T2 = y2;
-				mymeshArray[idx][idx_mesh].T3 = y3;
-				mymeshArray[idx][idx_mesh].T4 = y4;
+				mymeshArr[idx][idx_mesh].V1 = x1;
+				mymeshArr[idx][idx_mesh].V2 = x2;
+				mymeshArr[idx][idx_mesh].V3 = x3;
+				mymeshArr[idx][idx_mesh].V4 = x4;
+				mymeshArr[idx][idx_mesh].T1 = y1;
+				mymeshArr[idx][idx_mesh].T2 = y2;
+				mymeshArr[idx][idx_mesh].T3 = y3;
+				mymeshArr[idx][idx_mesh].T4 = y4;
 
 				idx_mesh++;
 			}
@@ -593,23 +602,23 @@ void NewLoadObj(int idx, const char* filepath, int move_x, int move_y, int move_
 
 int main(int argc, char* argv[])
 {
-	vertex = new Vertex[100000];
-	vertex_color = new Vertex[100000];
-	mymesh = new MMesh[100000];
+	int numobject = 1;
 
-	int numobject = 2;
-
-	vertexArray = new Vertex*[numobject];
+	vertexArr = new Vertex*[numobject];
 	for (int i = 0; i < numobject; i++) {
-		vertexArray[i] = new Vertex[100000];
+		vertexArr[i] = new Vertex[100000];
 	}
-	mymeshArray = new MMesh*[numobject];
+	vcolorArr = new Vertex * [numobject];
 	for (int i = 0; i < numobject; i++) {
-		mymeshArray[i] = new MMesh[100000];
+		vcolorArr[i] = new Vertex[100000];
+	}
+	mymeshArr = new MMesh*[numobject];
+	for (int i = 0; i < numobject; i++) {
+		mymeshArr[i] = new MMesh[100000];
 	}
 
 	int i, j, k = 0;
-	FILE* f = fopen("assets/apple/applet.bmp", "rb");
+	FILE* f = fopen("assets/nightmare/spiral_hill/spiral_hill_texture.bmp", "rb");
 	unsigned char info[54];
 	fread(info, sizeof(unsigned char), 54, f); // read the 54-byte header
 	// extract image height and width from header
@@ -628,27 +637,29 @@ int main(int argc, char* argv[])
 			mytexels[j][i][2] = data[k * 3];
 			k++;
 		}
+	
+	NewLoadObj(0, "assets/nightmare/spiral_hill/spiral_hill.obj", 0, 0, 0);
+	//NewLoadObj(0, "assets/nightmare/hill/hill2.obj", 0, 0, 0);
 
-	NewLoadObj(0, "assets/snowman/NightMare2.obj");
-	NewLoadObj(1, "assets/apple/bigapple.obj", 1, 0, 0);
 
 	InitializeWindow(argc, argv);
 
 	display();
 
 	glutMainLoop();
-	delete[] vertex;
-	delete[] mymesh;
-	delete[] vertex_color;
 
 	for (int i = 0; i < numobject; i++) {
-		delete[] vertexArray[i];
+		delete[] vertexArr[i];
 	}
-	delete[] vertexArray;
+	delete[] vertexArr;
 	for (int i = 0; i < numobject; i++) {
-		delete[] mymeshArray[i];
+		delete[] vcolorArr[i];
 	}
-	delete[] mymeshArray;
+	delete[] vcolorArr;
+	for (int i = 0; i < numobject; i++) {
+		delete[] mymeshArr[i];
+	}
+	delete[] mymeshArr;
 
 	return 0;
 }

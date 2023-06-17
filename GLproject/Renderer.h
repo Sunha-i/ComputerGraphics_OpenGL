@@ -144,7 +144,7 @@ int num_vertices;
 int num_faces[2];
 
 int myobject;
-int myscale;	// vertex의 값들을 정규화 (box의 max line의 크기가 1이 되도록, 위치는 고려안됨)
+float myscale;	// vertex의 값들을 정규화 (box의 max line의 크기가 1이 되도록, 위치는 고려안됨)
 void LoadObj(const char* filepath, int move_x = 0, int move_y = 0, int move_z = 0);
 void DrawObj(int idx);
 void NewLoadObj(int idx, const char* filepath, int move_x = 0, int move_y = 0, int move_z = 0);
@@ -157,5 +157,6 @@ Vertex* vertex2;
 Vertex* vertex_color2;
 MMesh* mymesh2;
 
-Vertex** vertexArray;
-MMesh** mymeshArray;
+Vertex** vertexArr;
+Vertex** vcolorArr;
+MMesh** mymeshArr;
