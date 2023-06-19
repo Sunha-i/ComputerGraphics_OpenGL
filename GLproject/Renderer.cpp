@@ -413,46 +413,34 @@ void display()
 
 	// Flat Shading Ãß°¡
 	glShadeModel(GL_FLAT);
+	
+	for (int i = 0; i < numobject; i++)
+	{
+		glTexImage2D(GL_TEXTURE_2D, 0, 3, 2048, 2048, 0, GL_RGB, GL_UNSIGNED_BYTE, mytexels[i]);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+		glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, 2048, 2048, 0, GL_RGB, GL_UNSIGNED_BYTE, mytexels[0]);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+		glEnable(GL_TEXTURE_2D);
+		glBegin(GL_QUADS);
 
+		DrawObj(i);
 
-	glEnable(GL_TEXTURE_2D);
-	glBegin(GL_QUADS);
-
-	DrawObj(0);
-
-	glEnd();
-
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, 2048, 2048, 0, GL_RGB, GL_UNSIGNED_BYTE, mytexels[1]);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
-	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
-	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
-
-	glBegin(GL_QUADS);
-
-	DrawObj(1);
-
-	glEnd();
-
+		glEnd();
+	}
 
 	glutSwapBuffers();
 }
 
 
 /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-  Function: DrawObj()
+  Function: DrawObj(idx)
 
-  Summary:
+  Summary: Draw vertex, face, texture
 
-  Return: ...
+  Return: ...Just Draw
 -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
 void DrawObj(int idx)
 {
@@ -472,7 +460,7 @@ void DrawObj(int idx)
 
 
 /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-  Function: LoadObj(const char* filepath)
+  Function: LoadObj(idx, bmppath, objpath, move_x, move_y, move_z)
 
   Summary: read v, vt, f
 		   & count vertex, find vertex range
@@ -480,10 +468,12 @@ void DrawObj(int idx)
 
   Return: ...
 -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
-void NewLoadObj(int idx, const char* filepath, int move_x, int move_y, int move_z)
+void LoadObj(int idx, const char* bmppath, const char* objpath, int move_x, int move_y, int move_z)
 {
+	SetTexture(idx, bmppath);
+
 	FILE* fp;
-	fp = fopen(filepath, "r");
+	fp = fopen(objpath, "r");
 
 	num_vertices = 0;
 	num_faces[idx] = 0;
@@ -540,7 +530,7 @@ void NewLoadObj(int idx, const char* filepath, int move_x, int move_y, int move_
 
 	myscale = max(max(x_max - x_min, y_max - y_min), z_max - z_min);
 
-	fp = fopen(filepath, "r");
+	fp = fopen(objpath, "r");
 
 	while (1)
 	{
@@ -609,6 +599,41 @@ void NewLoadObj(int idx, const char* filepath, int move_x, int move_y, int move_
 	fclose(fp);
 }
 
+/*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
+  Function: SetTexture(int idx, const char* filepath)
+
+  Summary: read v, vt, f
+		   & count vertex, find vertex range
+		   & save to vertex, vertex_color, mymesh structure
+
+  Return: ...
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
+void SetTexture(int idx, const char* filepath)
+{
+	int i, j, k = 0;
+	FILE* f = fopen(filepath, "rb");
+	unsigned char info[54];
+	fread(info, sizeof(unsigned char), 54, f); // read the 54-byte header
+	// extract image height and width from header
+	int width = *(int*)&info[18];
+	int height = *(int*)&info[22];
+
+	int size = 3 * width * height;
+	unsigned char* data = new unsigned char[size]; // allocate 3 bytes per pixel
+	fread(data, sizeof(unsigned char), size, f); // read the rest of the data at once
+	fclose(f);
+	for (i = 0; i < width; i++)
+	{
+		for (j = 0; j < height; j++)
+		{
+			mytexels[idx][j][i][0] = data[k * 3 + 2];
+			mytexels[idx][j][i][1] = data[k * 3 + 1];
+			mytexels[idx][j][i][2] = data[k * 3];
+			k++;
+		}
+	}
+}
+
 
 int main(int argc, char* argv[])
 {
@@ -627,51 +652,10 @@ int main(int argc, char* argv[])
 		mymeshArr[i] = new MMesh[100000];
 	}
 
-	int i, j, k = 0;
-	FILE* f = fopen("assets/nightmare/spiral_hill/spiral_hill_texture.bmp", "rb");
-	unsigned char info[54];
-	fread(info, sizeof(unsigned char), 54, f); // read the 54-byte header
-	// extract image height and width from header
-	int width = *(int*)&info[18];
-	int height = *(int*)&info[22];
-
-	int size = 3 * width * height;
-	unsigned char* data = new unsigned char[size]; // allocate 3 bytes per pixel
-	fread(data, sizeof(unsigned char), size, f); // read the rest of the data at once
-	fclose(f);
-	for (i = 0; i < width; i++)
-		for (j = 0; j < height; j++)
-		{
-			mytexels[0][j][i][0] = data[k * 3 + 2];
-			mytexels[0][j][i][1] = data[k * 3 + 1];
-			mytexels[0][j][i][2] = data[k * 3];
-			k++;
-		}
-
-	i, j, k = 0;
-	f = fopen("assets/apple/applet.bmp", "rb");
-	unsigned char info2[54];
-	fread(info2, sizeof(unsigned char), 54, f); // read the 54-byte header
-	// extract image height and width from header
-	width = *(int*)&info2[18];
-	height = *(int*)&info2[22];
-
-	size = 3 * width * height;
-	unsigned char* data2 = new unsigned char[size]; // allocate 3 bytes per pixel
-	fread(data2, sizeof(unsigned char), size, f); // read the rest of the data at once
-	fclose(f);
-	for (i = 0; i < width; i++)
-		for (j = 0; j < height; j++)
-		{
-			mytexels[1][j][i][0] = data2[k * 3 + 2];
-			mytexels[1][j][i][1] = data2[k * 3 + 1];
-			mytexels[1][j][i][2] = data2[k * 3];
-			k++;
-		}
-
-	NewLoadObj(0, "assets/nightmare/spiral_hill/spiral_hill.obj", 1, 0, 0);
-	NewLoadObj(1, "assets/apple/bigapple.obj", 0, 0, 0);
-
+	LoadObj(0, "assets/nightmare/spiral_hill/spiral_hill_texture.bmp", 
+			   "assets/nightmare/spiral_hill/spiral_hill.obj", 1, 0, 0);
+	LoadObj(1, "assets/apple/applet.bmp", 
+		       "assets/apple/bigapple.obj", 0, 0, 0);
 
 	InitializeWindow(argc, argv);
 
