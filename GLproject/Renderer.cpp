@@ -331,9 +331,9 @@ void InitializeWindow(int argc, char* argv[])
 	glutInit(&argc, argv);
 
 	glutInitDisplayMode(GLUT_RGBA | GLUT_DOUBLE | GLUT_ALPHA | GLUT_DEPTH);
-	glutInitWindowSize(1000 / 2, 1000 / 2);
+	glutInitWindowSize(1000 / 1.5, 1000 / 1.5);
 
-	glutInitWindowPosition(1000, 500);
+	glutInitWindowPosition(500, 300);
 
 	dispWindowIndex = glutCreateWindow("3D Model");
 
@@ -414,7 +414,7 @@ void display()
 	// Flat Shading Ãß°¡
 	glShadeModel(GL_FLAT);
 
-	glTexImage2D(GL_TEXTURE_2D, 0, 3, 2048, 2048, 0, GL_RGB, GL_UNSIGNED_BYTE, mytexels);
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, 2048, 2048, 0, GL_RGB, GL_UNSIGNED_BYTE, mytexels[0]);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -425,11 +425,21 @@ void display()
 	glEnable(GL_TEXTURE_2D);
 	glBegin(GL_QUADS);
 
-	for (int i = 0; i < 1; i++)
-	{
-		DrawObj(i);
-	}
-	
+	DrawObj(0);
+
+	glEnd();
+
+	glTexImage2D(GL_TEXTURE_2D, 0, 3, 2048, 2048, 0, GL_RGB, GL_UNSIGNED_BYTE, mytexels[1]);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
+	glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_NEAREST);
+	glTexEnvf(GL_TEXTURE_ENV, GL_TEXTURE_ENV_MODE, GL_MODULATE);
+
+	glBegin(GL_QUADS);
+
+	DrawObj(1);
+
 	glEnd();
 
 
@@ -527,7 +537,7 @@ void NewLoadObj(int idx, const char* filepath, int move_x, int move_y, int move_
 			break;*/
 	}
 	fclose(fp);
-	
+
 	myscale = max(max(x_max - x_min, y_max - y_min), z_max - z_min);
 
 	fp = fopen(filepath, "r");
@@ -556,7 +566,7 @@ void NewLoadObj(int idx, const char* filepath, int move_x, int move_y, int move_
 			}
 			if (idx_vtx) {};
 		}
-		
+
 		else if (strcmp(lineHeader, "vt") == 0)
 		{
 			count = fscanf(fp, "%f %f /n", &x, &y);
@@ -602,9 +612,9 @@ void NewLoadObj(int idx, const char* filepath, int move_x, int move_y, int move_
 
 int main(int argc, char* argv[])
 {
-	int numobject = 1;
+	numobject = 2;
 
-	vertexArr = new Vertex*[numobject];
+	vertexArr = new Vertex * [numobject];
 	for (int i = 0; i < numobject; i++) {
 		vertexArr[i] = new Vertex[100000];
 	}
@@ -612,7 +622,7 @@ int main(int argc, char* argv[])
 	for (int i = 0; i < numobject; i++) {
 		vcolorArr[i] = new Vertex[100000];
 	}
-	mymeshArr = new MMesh*[numobject];
+	mymeshArr = new MMesh * [numobject];
 	for (int i = 0; i < numobject; i++) {
 		mymeshArr[i] = new MMesh[100000];
 	}
@@ -632,14 +642,35 @@ int main(int argc, char* argv[])
 	for (i = 0; i < width; i++)
 		for (j = 0; j < height; j++)
 		{
-			mytexels[j][i][0] = data[k * 3 + 2];
-			mytexels[j][i][1] = data[k * 3 + 1];
-			mytexels[j][i][2] = data[k * 3];
+			mytexels[0][j][i][0] = data[k * 3 + 2];
+			mytexels[0][j][i][1] = data[k * 3 + 1];
+			mytexels[0][j][i][2] = data[k * 3];
 			k++;
 		}
-	
-	NewLoadObj(0, "assets/nightmare/spiral_hill/spiral_hill.obj", 0, 0, 0);
-	//NewLoadObj(0, "assets/nightmare/hill/hill2.obj", 0, 0, 0);
+
+	i, j, k = 0;
+	f = fopen("assets/apple/applet.bmp", "rb");
+	unsigned char info2[54];
+	fread(info2, sizeof(unsigned char), 54, f); // read the 54-byte header
+	// extract image height and width from header
+	width = *(int*)&info2[18];
+	height = *(int*)&info2[22];
+
+	size = 3 * width * height;
+	unsigned char* data2 = new unsigned char[size]; // allocate 3 bytes per pixel
+	fread(data2, sizeof(unsigned char), size, f); // read the rest of the data at once
+	fclose(f);
+	for (i = 0; i < width; i++)
+		for (j = 0; j < height; j++)
+		{
+			mytexels[1][j][i][0] = data2[k * 3 + 2];
+			mytexels[1][j][i][1] = data2[k * 3 + 1];
+			mytexels[1][j][i][2] = data2[k * 3];
+			k++;
+		}
+
+	NewLoadObj(0, "assets/nightmare/spiral_hill/spiral_hill.obj", 1, 0, 0);
+	NewLoadObj(1, "assets/apple/bigapple.obj", 0, 0, 0);
 
 
 	InitializeWindow(argc, argv);

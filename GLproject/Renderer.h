@@ -51,7 +51,7 @@ GLint trans_x = 0;
 GLint trans_y = 0;
 GLint trans_z = 0;
 
-GLubyte mytexels[2048][2048][3];
+GLubyte mytexels[2][2048][2048][3];
 
 int add_depth_flag = 0;
 int model_flag = 0;
@@ -143,7 +143,7 @@ float z_min = 100000, z_max = -100000;
 int num_vertices;
 int num_faces[2];
 
-int myobject;
+int numobject;
 float myscale;	// vertex의 값들을 정규화 (box의 max line의 크기가 1이 되도록, 위치는 고려안됨)
 void LoadObj(const char* filepath, int move_x = 0, int move_y = 0, int move_z = 0);
 void DrawObj(int idx);
