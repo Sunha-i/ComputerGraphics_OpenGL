@@ -381,18 +381,69 @@ void display()
 	glMultMatrixf(&m[0][0]);
 
 
+	trcon = trcon - 1;
+	glRotatef(trcon, 0.0, 1.0, 0.0);
+	//glTranslatef(trcon/50.0,0,0); 
+	//glRotatef(100, 0.0, 1.0, 0.0);
+	float cosval = cosf(trcon / 50.0);
+	float sinval = sinf(trcon / 50.0);
+
+	m1[0][0] = cosval;
+	m1[0][1] = 0 - sinval;
+	m1[0][2] = 0.0f;
+	m1[0][3] = 0.0f;
+
+	m1[1][0] = sinval;
+	m1[1][1] = cosval;
+	m1[1][2] = 0.0f;
+	m1[1][3] = 0.0f;
+
+	m1[2][0] = 0.0f;
+	m1[2][1] = 0.0f;
+	m1[2][2] = 1.0f;
+	m1[2][3] = 0.0f;
+
+	m1[3][0] = 0.0f;
+	m1[3][1] = 0.0f;
+	m1[3][2] = 0.0f;
+	m1[3][3] = 1.0f;
+	
+	// glcode3
+	/*glPointSize(3);
+	glBegin(GL_POINTS);
+	float fill_int;
+	float xx1, yy1, zz1;
+	for (register int j = 0; j < 100000; j = j + 1)
+	{
+		fill_int = (vertex[j].Z - zmin) / (zmax - zmin);
+		glColor3f(1 - fill_int, 1 - fill_int, 1 - fill_int);
+		glVertex3f(vertex[j].X, vertex[j].Y, vertex[j].Z);
+
+		glColor3f(1 - fill_int, 1 - fill_int, 1 - fill_int);
+		xx1 = m1[0][0] * (vertex[j].X - 0.3) + m1[0][1] * vertex[j].Y + m1[0][2] * vertex[j].Z;
+		yy1 = m1[1][0] * (vertex[j].X - 0.3) + m1[1][1] * vertex[j].Y + m1[1][2] * vertex[j].Z;
+		zz1 = m1[2][0] * (vertex[j].X - 0.3) + m1[2][1] * vertex[j].Y + m1[2][2] * vertex[j].Z;
+		glVertex3f(xx1, yy1, zz1);
+	}
+
+	glEnd();
+	glutSwapBuffers();*/
+
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
 	GLfloat diffuse0[4] = { 1.0, 1.0, 1.0, 1.0 };
 	GLfloat ambient0[4] = { 0.5, 0.5, 0.5, 1.0 };
 	GLfloat specular0[4] = { 1.0, 1.0, 1.0, 1.0 };
 	GLfloat light0_pos[4] = { 2.0, 2.0, 2.0, 1.0 };
+	GLfloat spot_dir[3] = { 0.0f, 0.0f, 0.0f };
 
 	glLightfv(GL_LIGHT0, GL_POSITION, light0_pos);
 	glLightfv(GL_LIGHT0, GL_AMBIENT, ambient0);
 	glLightfv(GL_LIGHT0, GL_DIFFUSE, diffuse0);
 	glLightfv(GL_LIGHT0, GL_SPECULAR, specular0);
-
+	/*glLightfv(GL_LIGHT0, GL_SPOT_DIRECTION, spot_dir);
+	glLightf(GL_LIGHT0, GL_SPOT_CUTOFF, 100.0);
+	glLightf(GL_LIGHT0, GL_SPOT_EXPONENT, 1.0);*/
 
 	glLightf(GL_LIGHT0, GL_CONSTANT_ATTENUATION, 0.2);
 	glLightf(GL_LIGHT0, GL_LINEAR_ATTENUATION, 0.1);
@@ -429,6 +480,7 @@ void display()
 		DrawObj(i);
 
 		glEnd();
+		glRotatef(30, 0.0, 1.0, 0.0);
 	}
 
 	glutSwapBuffers();
@@ -465,10 +517,11 @@ void DrawObj(int idx)
   Summary: read v, vt, f
 		   & count vertex, find vertex range
 		   & save to vertex, vertex_color, mymesh structure
+		   & set to origin
 
   Return: ...
 -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
-void LoadObj(int idx, const char* bmppath, const char* objpath, int move_x, int move_y, int move_z)
+void LoadObj(int idx, const char* bmppath, const char* objpath, float move_x, float move_y, float move_z, float myscale)
 {
 	SetTexture(idx, bmppath);
 
@@ -528,7 +581,10 @@ void LoadObj(int idx, const char* bmppath, const char* objpath, int move_x, int 
 	}
 	fclose(fp);
 
-	myscale = max(max(x_max - x_min, y_max - y_min), z_max - z_min);
+	float x_size = x_max - x_min;
+	float y_size = y_max - y_min;
+	float z_size = z_max - z_min;
+	normalize = max(max(x_size, y_size), z_size);
 
 	fp = fopen(objpath, "r");
 
@@ -545,12 +601,12 @@ void LoadObj(int idx, const char* bmppath, const char* objpath, int move_x, int 
 			count = fscanf(fp, "%f %f %f /n", &x, &y, &z);
 			if (count == 3)
 			{
-				tmp_x = x - x_min;
-				tmp_y = y - y_min;
-				tmp_z = z - z_min;
-				vertexArr[idx][idx_vtx].X = tmp_x / myscale + move_x;
-				vertexArr[idx][idx_vtx].Y = tmp_y / myscale + move_y;
-				vertexArr[idx][idx_vtx].Z = tmp_z / myscale + move_z;
+				tmp_x = x - x_min - x_size / 2;
+				tmp_y = y - y_min - y_size / 2;
+				tmp_z = z - z_min - z_size / 2;
+				vertexArr[idx][idx_vtx].X = tmp_x / normalize * myscale + move_x;
+				vertexArr[idx][idx_vtx].Y = tmp_y / normalize * myscale + move_y;
+				vertexArr[idx][idx_vtx].Z = tmp_z / normalize * myscale + move_z;
 
 				idx_vtx++;
 			}
@@ -637,7 +693,7 @@ void SetTexture(int idx, const char* filepath)
 
 int main(int argc, char* argv[])
 {
-	numobject = 2;
+	numobject = 1;
 
 	vertexArr = new Vertex * [numobject];
 	for (int i = 0; i < numobject; i++) {
@@ -652,10 +708,18 @@ int main(int argc, char* argv[])
 		mymeshArr[i] = new MMesh[100000];
 	}
 
-	LoadObj(0, "assets/nightmare/spiral_hill/spiral_hill_texture.bmp", 
-			   "assets/nightmare/spiral_hill/spiral_hill.obj", 1, 0, 0);
-	LoadObj(1, "assets/apple/applet.bmp", 
-		       "assets/apple/bigapple.obj", 0, 0, 0);
+	LoadObj(0, "assets/nightmare/spiral_hill/spiral_hill_texture.bmp",
+			   "assets/nightmare/hill/plz_copy.obj", 0, 0, 0, 2.5);
+	/*LoadObj(0, "assets/nightmare/fence/fence_texture.bmp",
+			   "assets/nightmare/fence/myfence_copy.obj", 1, 0, 0, 1.5);*/
+	/*LoadObj(1, "assets/nightmare/fence/Zaun.bmp",
+			   "assets/nightmare/fence/fence1.obj", 1, 0, 0, 1.5);*/
+	//LoadObj(1, "assets/apple/applet.bmp", 
+	//	       "assets/apple/bigapple.obj");
+	//LoadObj(1, "assets/nightmare/spiral_hill/spiral_hill_texture.bmp",
+	//		   "assets/nightmare/hill/hill_copy.obj",0,0,0,2);
+	//LoadObj(0, "assets/nightmare/spiral_hill/spiral_hill_texture.bmp",
+		//	   "assets/nightmare/hill/plz_copy.obj", 0, -1, -1, 2);*/
 
 	InitializeWindow(argc, argv);
 

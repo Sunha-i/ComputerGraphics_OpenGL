@@ -144,13 +144,13 @@ int num_vertices;
 int num_faces[2];
 
 int numobject;
-float myscale;	// vertex의 값들을 정규화 (box의 max line의 크기가 1이 되도록, 위치는 고려안됨)
+float normalize;	// vertex의 값들을 정규화 (box의 max line의 크기가 1이 되도록, 위치는 고려안됨)
 void DrawObj(int idx);
-void LoadObj(int idx, const char* bmppath, const char* objpath, int move_x = 0, int move_y = 0, int move_z = 0);
+void LoadObj(int idx, const char* bmppath, const char* objpath, float move_x = 0, float move_y = 0, float move_z = 0, float myscale = 1);
 void SetTexture(int idx, const char* filepath);
 
-// 일단 정규화를 하면서 위치까지 조정되도록..
-// 예를 들어 100*30*40, 2*3*5 인 물체가 있다고 해보자 (이건 fitting box 기준 크기)
+// 일단 정규화를 하면서 origin으로 조정되도록
+// 이건 fitting box 기준 크기
 
 Vertex* vertex2;
 Vertex* vertex_color2;
