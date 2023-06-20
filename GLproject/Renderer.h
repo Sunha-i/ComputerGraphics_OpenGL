@@ -136,12 +136,15 @@ void Track();
 #define max(a,b)  (((a) > (b)) ? (a) : (b))
 #define min(a,b)  (((a) < (b)) ? (a) : (b))
 
+float x_size;	// x_max - x_min
+float y_size;	// y_max - y_min
+float z_size;	// z_max - z_min
 float x_min = 100000, x_max = -100000;
 float y_min = 100000, y_max = -100000;
 float z_min = 100000, z_max = -100000;
 
 int num_vertices;
-int num_faces[2];
+int num_faces[10];
 
 int numobject;
 float normalize;	// vertex의 값들을 정규화 (box의 max line의 크기가 1이 되도록, 위치는 고려안됨)

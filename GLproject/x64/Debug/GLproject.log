@@ -2,23 +2,30 @@
 C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(36,24): warning C4244: '=': 'GLuint'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(334,38): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(334,26): warning C4244: '인수': 'double'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(385,12): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(388,28): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(389,28): warning C4244: '인수': 'double'에서 'float'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(448,50): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(449,48): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(450,52): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(452,50): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(453,48): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(454,52): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(489,30): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(494,32): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(498,33): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(499,32): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(503,31): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
 C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(380,16): warning C4101: 'b' :참조되지 않은 지역 변수입니다.
 C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(380,13): warning C4101: 'g' :참조되지 않은 지역 변수입니다.
 C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(380,10): warning C4101: 'r' :참조되지 않은 지역 변수입니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(638,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(639,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(640,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(641,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(642,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(643,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(644,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(645,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(538,6): warning C4101: 'tmp' :참조되지 않은 지역 변수입니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(541,7): warning C4101: 'ch' :참조되지 않은 지역 변수입니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(703,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(704,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(705,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(706,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(707,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(708,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(709,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(710,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(603,6): warning C4101: 'tmp' :참조되지 않은 지역 변수입니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(606,7): warning C4101: 'ch' :참조되지 않은 지역 변수입니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(779,64): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(784,56): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(787,53): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
   GLproject.vcxproj -> C:\Users\Sun\source\repos\ComputerGraphics\GLproject\x64\Debug\GLproject.exe
