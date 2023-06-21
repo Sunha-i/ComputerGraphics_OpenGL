@@ -390,8 +390,8 @@ void display()
 
 	m1[0][0] = cosval;
 	//m1[0][0] = 1.0f;
-	//m1[0][1] = 0 - sinval;
-	m1[0][1] = 0.0f;
+	m1[0][1] = 0 - sinval;
+	//m1[0][1] = 0.0f;
 	m1[0][2] = 0.0f;
 	m1[0][3] = 0.0f;
 
@@ -469,6 +469,9 @@ void display()
 	// Flat Shading 추가
 	glShadeModel(GL_SMOOTH);
 	//glRotatef(trcon, 0.0, 1.0, 0.0);
+
+	int cumRot = 0;
+
 	for (int i = 0; i < numobject; i++)
 	{
 		glTexImage2D(GL_TEXTURE_2D, 0, 3, 2048, 2048, 0, GL_RGB, GL_UNSIGNED_BYTE, mytexels[i]);
@@ -482,49 +485,112 @@ void display()
 		if (i == 0)
 		{
 			glRotatef(140, 0.0, 1.0, 0.0);
+			cumRot = 140;
 		}
 		else if (i == 1)
 		{
-			glRotatef(-50, 0.0, 1.0, 0.0);
+			glRotatef(90 - cumRot, 0.0, 1.0, 0.0);
 			glTranslatef(0, 0.35, -0.5);
+			cumRot = 90;
 		}
 		else if (i == 2)	// moon
 		{
-			glRotatef(90, 0.0, 1.0, 0.0);
-			glTranslatef(-0.5, 0.7, -1.0);
+			glRotatef(180 - cumRot, 0.0, 1.0, 0.0);
+			glTranslatef(-0.5, 0.75, -6.1);	// 0.7 -2.6
+			cumRot = 180;
 		}
-		else if (i == 3)
+		else if (i == 3)	// stone1
 		{
+			glTranslatef(0.0, -0.05, 5.1);	// 달 뒤로 보내기 1.6 + 3.5
 			glRotatef(285, 0.05, 1.0, 0.0);
 			glTranslatef(2.0, -1.13, 0.1);
 		}
-		else if (i == 4)
+		else if (i == 4)	// fence1
 		{
 			glTranslatef(0.0, 0.11, 0.0);
 		}
-		else if (i == 5)
+		else if (i == 5)	// cross
 		{
-			glTranslatef(-1.5, -1.0, 0.5);
+			// set to origin
+			glTranslatef(-2.0, 1.02, -0.1);
+			glRotatef(-285, 0.05, 1.0, 0.0);
+			glTranslatef(0.5, -0.7, 1.0);
+			glRotatef(-90, 0.0, 1.0, 0.0);
+			glTranslatef(0, -0.35, 0.5);
+			glRotatef(-90, 0.0, 1.0, 0.0);
+
+			glTranslatef(1.0, 0.2, 0.8);
+			glRotatef(20, 0.0, 1.0, 1.0);
+			//glTranslatef(-2.0, 1.0, 0.5);
 			//glRotatef(trcon, 0.0, 1.0, 0.0);
 		}
+		else if (i == 6)	// tombstone
+		{
+			glTranslatef(-0.7, 0.0, -0.6);
+			glRotatef(-30, 0.0, 1.0, 1.0);
+		}
+		else if (i == 7)
+		{
+			glRotatef(30, 0.0, 1.0, 1.0);
+			glTranslatef(0.7, 0.0, 0.6);
+			glRotatef(-20, 0.0, 1.0, 1.0);
+			glTranslatef(-1.0, -0.2, -0.8);
+			
+			glTranslatef(-0.5, 0.0, 0.98);
+			glRotatef(238, 0.0, 1.0, 0.0);
+			/*glTranslatef(-0.57, 0.0, 0.95);
+			glRotatef(240, 0.0, 1.0, 0.0);*/ //fence2_copy.obj
+			
+		}
+		else if (i == 8)
+		{
+			//glTranslatef(-0.018, 0.11, 0.0);	//fence2_copy.obj
+			glTranslatef(0.0, 0.11, 0.0);
+		}
+
+		//else if (i == 9)	// flying bat test
+		//{
+		//	glTranslatef(1.0, 0.3, 0.0);
+		//	glRotatef(30, 1.0, 0.0, 0.0);
+		//	glRotatef(trcon * 1.5, 0.0, 1.0, 0.0);
+		//	glTranslatef(1.0, 1.0, 0.0);
+		//}
+		//else if (i == 7)	
+		//{
+		//	
+		//}
+		//else if (i == 8)
+		//{
+		//	trcon = trcon + 1;
+		//}
+		/*else if (i == 6)	
+		{
+			glRotatef(90, 0.0, 1.0, 0.0);
+			glTranslatef(0.0, 0.0, 1.0);
+		}
+		else if (i == 7)
+		{
+			glTranslatef(2.0, 0.0, 0.0);
+		}*/
 		
 		glEnable(GL_TEXTURE_2D);
 		glBegin(GL_QUADS);
 
-		if (i == 5)
+		if (i == 10)
 		{
+			glRotatef(trcon, 0.0, 0.0, 1.0);
 			for (int jj = 0; jj < num_faces[i]; jj = jj + 1)
 			{
-				/*glTexCoord2d(vcolorArr[i][mymeshArr[i][jj].T1 - 1].X, vcolorArr[i][mymeshArr[i][jj].T1 - 1].Y);
-				glVertex3f(m1[0][0] * vertexArr[i][mymeshArr[i][jj].V1 - 1].X, m1[0][1] * vertexArr[i][mymeshArr[i][jj].V1 - 1].Y, m1[0][2] * vertexArr[i][mymeshArr[i][jj].V1 - 1].Z);
-				glTexCoord2d(vcolorArr[i][mymeshArr[i][jj].T2 - 1].X, vcolorArr[i][mymeshArr[i][jj].T2 - 1].Y);
-				glVertex3f(m1[1][0] * vertexArr[i][mymeshArr[i][jj].V2 - 1].X, m1[1][1] * vertexArr[i][mymeshArr[i][jj].V2 - 1].Y, m1[1][2] * vertexArr[i][mymeshArr[i][jj].V2 - 1].Z);
-				glTexCoord2d(vcolorArr[i][mymeshArr[i][jj].T3 - 1].X, vcolorArr[i][mymeshArr[i][jj].T3 - 1].Y);
-				glVertex3f(m1[2][0] * vertexArr[i][mymeshArr[i][jj].V3 - 1].X, m1[2][1] * vertexArr[i][mymeshArr[i][jj].V3 - 1].Y, m1[2][2] * vertexArr[i][mymeshArr[i][jj].V3 - 1].Z);
-				glTexCoord2d(vcolorArr[i][mymeshArr[i][jj].T4 - 1].X, vcolorArr[i][mymeshArr[i][jj].T4 - 1].Y);
-				glVertex3f(m1[3][0] * vertexArr[i][mymeshArr[i][jj].V4 - 1].X, m1[3][1] * vertexArr[i][mymeshArr[i][jj].V4 - 1].Y, m1[3][2] * vertexArr[i][mymeshArr[i][jj].V4 - 1].Z);*/
-				
 				glTexCoord2d(vcolorArr[i][mymeshArr[i][jj].T1 - 1].X, vcolorArr[i][mymeshArr[i][jj].T1 - 1].Y);
+				glVertex3f(m1[0][0] * vertexArr[i][mymeshArr[i][jj].V1 - 1].X, vertexArr[i][mymeshArr[i][jj].V1 - 1].Y, vertexArr[i][mymeshArr[i][jj].V1 - 1].Z);
+				glTexCoord2d(vcolorArr[i][mymeshArr[i][jj].T2 - 1].X, vcolorArr[i][mymeshArr[i][jj].T2 - 1].Y);
+				glVertex3f(m1[1][0] * vertexArr[i][mymeshArr[i][jj].V2 - 1].X, vertexArr[i][mymeshArr[i][jj].V2 - 1].Y, vertexArr[i][mymeshArr[i][jj].V2 - 1].Z);
+				glTexCoord2d(vcolorArr[i][mymeshArr[i][jj].T3 - 1].X, vcolorArr[i][mymeshArr[i][jj].T3 - 1].Y);
+				glVertex3f(m1[2][0] * vertexArr[i][mymeshArr[i][jj].V3 - 1].X, vertexArr[i][mymeshArr[i][jj].V3 - 1].Y, vertexArr[i][mymeshArr[i][jj].V3 - 1].Z);
+				glTexCoord2d(vcolorArr[i][mymeshArr[i][jj].T4 - 1].X, vcolorArr[i][mymeshArr[i][jj].T4 - 1].Y);
+				glVertex3f(m1[3][0] * vertexArr[i][mymeshArr[i][jj].V4 - 1].X, vertexArr[i][mymeshArr[i][jj].V4 - 1].Y, vertexArr[i][mymeshArr[i][jj].V4 - 1].Z);
+				
+				/*glTexCoord2d(vcolorArr[i][mymeshArr[i][jj].T1 - 1].X, vcolorArr[i][mymeshArr[i][jj].T1 - 1].Y);
 				glVertex3f(vertexArr[i][mymeshArr[i][jj].V1 - 1].X, vertexArr[i][mymeshArr[i][jj].V1 - 1].Y, vertexArr[i][mymeshArr[i][jj].V1 - 1].Z);
 				glTexCoord2d(vcolorArr[i][mymeshArr[i][jj].T2 - 1].X, vcolorArr[i][mymeshArr[i][jj].T2 - 1].Y);
 				glVertex3f(vertexArr[i][mymeshArr[i][jj].V2 - 1].X, vertexArr[i][mymeshArr[i][jj].V2 - 1].Y, vertexArr[i][mymeshArr[i][jj].V2 - 1].Z);
@@ -532,7 +598,7 @@ void display()
 				glVertex3f(vertexArr[i][mymeshArr[i][jj].V3 - 1].X, vertexArr[i][mymeshArr[i][jj].V3 - 1].Y, vertexArr[i][mymeshArr[i][jj].V3 - 1].Z);
 				glTexCoord2d(vcolorArr[i][mymeshArr[i][jj].T4 - 1].X, vcolorArr[i][mymeshArr[i][jj].T4 - 1].Y);
 				if (mymeshArr[i][jj].V4)
-					glVertex3f(vertexArr[i][mymeshArr[i][jj].V4 - 1].X, vertexArr[i][mymeshArr[i][jj].V4 - 1].Y, vertexArr[i][mymeshArr[i][jj].V4 - 1].Z);
+					glVertex3f(vertexArr[i][mymeshArr[i][jj].V4 - 1].X, vertexArr[i][mymeshArr[i][jj].V4 - 1].Y, vertexArr[i][mymeshArr[i][jj].V4 - 1].Z);*/
 			}
 		}
 		else
@@ -569,15 +635,16 @@ void DrawObj(int idx)
 		glVertex3f(vertexArr[idx][mymeshArr[idx][jj].V2 - 1].X, vertexArr[idx][mymeshArr[idx][jj].V2 - 1].Y, vertexArr[idx][mymeshArr[idx][jj].V2 - 1].Z);
 		glTexCoord2d(vcolorArr[idx][mymeshArr[idx][jj].T3 - 1].X, vcolorArr[idx][mymeshArr[idx][jj].T3 - 1].Y);
 		glVertex3f(vertexArr[idx][mymeshArr[idx][jj].V3 - 1].X, vertexArr[idx][mymeshArr[idx][jj].V3 - 1].Y, vertexArr[idx][mymeshArr[idx][jj].V3 - 1].Z);
-		glTexCoord2d(vcolorArr[idx][mymeshArr[idx][jj].T4 - 1].X, vcolorArr[idx][mymeshArr[idx][jj].T4 - 1].Y);
-		if (mymeshArr[idx][jj].V4)
+		if (mymeshArr[idx][jj].V4) {
+			glTexCoord2d(vcolorArr[idx][mymeshArr[idx][jj].T4 - 1].X, vcolorArr[idx][mymeshArr[idx][jj].T4 - 1].Y);
 			glVertex3f(vertexArr[idx][mymeshArr[idx][jj].V4 - 1].X, vertexArr[idx][mymeshArr[idx][jj].V4 - 1].Y, vertexArr[idx][mymeshArr[idx][jj].V4 - 1].Z);
+		}
 	}
 }
 
 
-/*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
-  Function: LoadObj(idx, bmppath, objpath, move_x, move_y, move_z)
+/*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
+  Function: LoadObj(idx, bmppath, objpath, myscale, move_x, move_y, move_z)
 
   Summary: read v, vt, f
 		   & count vertex, find vertex range
@@ -585,8 +652,8 @@ void DrawObj(int idx)
 		   & set to origin
 
   Return: ...nothing
--+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
-void LoadObj(int idx, const char* bmppath, const char* objpath, float move_x, float move_y, float move_z, float myscale)
+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
+void LoadObj(int idx, const char* bmppath, const char* objpath, float myscale, float move_x, float move_y, float move_z)
 {
 	SetTexture(idx, bmppath);
 
@@ -669,9 +736,9 @@ void LoadObj(int idx, const char* bmppath, const char* objpath, float move_x, fl
 				tmp_x = x - x_min - x_size / 2;
 				tmp_y = y - y_min - y_size / 2;
 				tmp_z = z - z_min - z_size / 2;
-				vertexArr[idx][idx_vtx].X = tmp_x / normalize * myscale;	// + move_x;
-				vertexArr[idx][idx_vtx].Y = tmp_y / normalize * myscale;	// + move_y;
-				vertexArr[idx][idx_vtx].Z = tmp_z / normalize * myscale;	// + move_z;
+				vertexArr[idx][idx_vtx].X = tmp_x / normalize * myscale + move_x;
+				vertexArr[idx][idx_vtx].Y = tmp_y / normalize * myscale + move_y;
+				vertexArr[idx][idx_vtx].Z = tmp_z / normalize * myscale + move_z;
 
 				idx_vtx++;
 			}
@@ -723,9 +790,7 @@ void LoadObj(int idx, const char* bmppath, const char* objpath, float move_x, fl
 /*-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-
   Function: SetTexture(int idx, const char* filepath)
 
-  Summary: read v, vt, f
-		   & count vertex, find vertex range
-		   & save to vertex, vertex_color, mymesh structure
+  Summary: read bitmap file
 
   Return: ...
 -+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-+-*/
@@ -758,7 +823,7 @@ void SetTexture(int idx, const char* filepath)
 
 int main(int argc, char* argv[])
 {
-	numobject = 6;
+	numobject = 10;
 
 	vertexArr = new Vertex * [numobject];
 	for (int i = 0; i < numobject; i++) {
@@ -774,19 +839,49 @@ int main(int argc, char* argv[])
 	}
 
 	LoadObj(0, "assets/nightmare/spiral_hill/spiral_hill_texture.bmp",
-			   "assets/nightmare/hill/plz_copy.obj", 0.0, 0.0, 0.0, 3.0);
+			   "assets/nightmare/hill/plz_copy.obj", 3.0);
 	LoadObj(1, "assets/nightmare/spiral_hill/spiral_hill_texture.bmp",
-			   "assets/nightmare/hill/hill_copy.obj", 0.0, 0.0, 0.0, 1.8);
+			   "assets/nightmare/hill/hill_copy.obj", 1.8);
 	LoadObj(2, "assets/nightmare/moon/moon_texture.bmp",
-			   "assets/nightmare/moon/moon.obj", 0.0, 0.0, 0.0, 1.5);
-
+			   "assets/nightmare/moon/moon.obj", 2.45);		// 1.75
 	LoadObj(3, "assets/nightmare/hill/Hill_baseColor.bmp",
-			   "assets/nightmare/fence/stone1.obj", 0, 0.1, 0, 2);
-	
+			   "assets/nightmare/fence/stone1.obj", 2.0);
 	LoadObj(4, "assets/nightmare/fence/Zaun.bmp",
-			"assets/nightmare/fence/fence1.obj", 0, 0.2, 0, 2);
-	LoadObj(5, "assets/nightmare/tree/tree1.bmp",
-		"assets/nightmare/tree/tree_copy.obj", 0, 0, 0, 0.5);
+			   "assets/nightmare/fence/fence1.obj", 2.0);
+
+	LoadObj(5, "assets/nightmare/cross/cross_texture.bmp",
+			   "assets/nightmare/cross/cross2.obj", 0.17);
+	LoadObj(6, "assets/nightmare/cross/tombstone_texture.bmp",
+			   "assets/nightmare/cross/tombstone.obj", 0.18);
+
+	/*LoadObj(7, "assets/nightmare/hill/Hill_baseColor.bmp",
+			   "assets/nightmare/fence/stone2.obj", 1.95);
+	LoadObj(8, "assets/nightmare/fence/Zaun.bmp",
+			   "assets/nightmare/fence/fence2_copy.obj", 1.95);*/
+	LoadObj(7, "assets/nightmare/hill/Hill_baseColor.bmp",
+		"assets/nightmare/fence/stone1.obj", 1.9);
+	LoadObj(8, "assets/nightmare/fence/Zaun.bmp",
+		"assets/nightmare/fence/fence1.obj", 1.9);
+
+	/*LoadObj(7, "assets/nightmare/moon/moon_texture.bmp",
+			   "assets/nightmare/fence/stone3.obj", 1.9);*/
+
+
+	LoadObj(9, "assets/apple/glitter.bmp", "assets/bat2.obj", 0.3);
+	//LoadObj(8, "assets/apple/glitter.bmp", "assets/apple/bigapple.obj", 0.8);
+
+	/*LoadObj(5, "assets/apple/applet.bmp",
+			"assets/apple/bigapple.obj", 2.0);*/
+	/*LoadObj(6, "assets/nightmare/fence/Zaun.bmp",
+		"assets/nightmare/fence/fence2.obj", 1.7);
+
+	LoadObj(7, "assets/nightmare/cross/cross_texture.bmp", 
+			   "assets/nightmare/cross/cross2.obj", 0.17);*/
+
+	/*LoadObj(6, "assets/nightmare/hill/Hill_baseColor.bmp", "assets/bat2.obj", 0.5);
+	LoadObj(7, "assets/nightmare/hill/Hill_baseColor.bmp", "assets/nightmare/cross/cross.obj", 0.5);*/
+
+
 	//LoadObj(5, "assets/apple/applet.bmp", "assets/apple/bigapple.obj", 0, 0, 0, 0.5);
 
 	
