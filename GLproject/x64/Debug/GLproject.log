@@ -11,39 +11,50 @@ C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(492,
 C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(493,30): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
 C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(498,18): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(499,33): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(504,32): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(505,33): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(506,32): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(510,31): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(515,33): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(516,34): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(517,31): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(519,30): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(522,30): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(529,32): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(535,30): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(537,33): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(539,32): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(548,31): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(581,14): warning C4244: '인수': 'int'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(508,19): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(514,20): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(518,32): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(519,33): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(520,32): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(524,31): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(529,33): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(530,34): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(531,31): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(533,30): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(536,31): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(543,33): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(549,30): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(551,33): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(553,32): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(562,31): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(566,32): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(568,32): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(570,30): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(571,32): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(575,33): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(576,32): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(580,20): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(581,30): warning C4305: '인수': 'double'에서 'GLfloat'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(588,21): warning C4244: '인수': 'double'에서 'GLfloat'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(380,16): warning C4101: 'b' :참조되지 않은 지역 변수입니다.
 C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(380,13): warning C4101: 'g' :참조되지 않은 지역 변수입니다.
 C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(380,10): warning C4101: 'r' :참조되지 않은 지역 변수입니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(770,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(771,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(772,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(773,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(774,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(775,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(776,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
 C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(777,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(670,6): warning C4101: 'tmp' :참조되지 않은 지역 변수입니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(673,7): warning C4101: 'ch' :참조되지 않은 지역 변수입니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(844,49): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(846,45): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(853,48): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(855,51): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(862,43): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(864,43): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
-C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(870,63): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(778,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(779,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(780,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(781,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(782,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(783,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(784,35): warning C4244: '=': 'float'에서 'int'(으)로 변환하면서 데이터가 손실될 수 있습니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(677,6): warning C4101: 'tmp' :참조되지 않은 지역 변수입니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(680,7): warning C4101: 'ch' :참조되지 않은 지역 변수입니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(852,49): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(855,45): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(865,48): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(867,51): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(874,47): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(876,47): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(880,41): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
+C:\Users\Sun\source\repos\ComputerGraphics\GLproject\GLproject\Renderer.cpp(881,65): warning C4305: '인수': 'double'에서 'float'(으)로 잘립니다.
   GLproject.vcxproj -> C:\Users\Sun\source\repos\ComputerGraphics\GLproject\x64\Debug\GLproject.exe

@@ -397,10 +397,10 @@ void display()
 
 	/*m1[1][0] = sinval;
 	m1[1][1] = cosval;*/
-	m1[1][0] = 0.0f;
-	m1[1][1] = 1.0f;
-	m1[1][2] = 0.0f;
-	m1[1][3] = 0.0f;
+	m1[0][0] = 1.0f;
+	m1[0][1] = 1.0f;
+	m1[0][2] = 1.0f;
+	m1[0][3] = 1.0f;
 
 	m1[2][0] = 0.0f;
 	m1[2][1] = 0.0f;
@@ -466,7 +466,7 @@ void display()
 	glMaterialfv(GL_FRONT, GL_SPECULAR, mat_specular);
 	glMaterialf(GL_FRONT, GL_SHININESS, mat_shininess);
 
-	// Flat Shading 추가
+	// Shading 추가
 	glShadeModel(GL_SMOOTH);
 	//glRotatef(trcon, 0.0, 1.0, 0.0);
 
@@ -499,17 +499,31 @@ void display()
 			glTranslatef(-0.5, 0.75, -6.1);	// 0.7 -2.6
 			cumRot = 180;
 		}
-		else if (i == 3)	// stone1
+		
+		else if (i == 3)
 		{
+			/*glTranslatef(-2.5, 0.0, -2.0);*/		// apple glitter
+			glTranslatef(0.0, 0.0, -1.0);
+			glRotatef(90, 1.0, 0.0, 0.0);
+			glRotatef(trcon/2.5, 0.0, 1.0, 0.0);
+		}
+
+		else if (i == 4)	// stone1
+		{
+			//glTranslatef(2.5, 0.0, 0.0);
+			glRotatef(-trcon/2.5 , 0.0, 1.0, 0.0);
+			glRotatef(-90, 1.0, 0.0, 0.0);
+			glTranslatef(0.0, 0.0, 1.0);
+			//glTranslatef(2.5, 0.0, 2.0);	// apple glitter set 
 			glTranslatef(0.0, -0.05, 5.1);	// 달 뒤로 보내기 1.6 + 3.5
 			glRotatef(285, 0.05, 1.0, 0.0);
 			glTranslatef(2.0, -1.13, 0.1);
 		}
-		else if (i == 4)	// fence1
+		else if (i == 5)	// fence1
 		{
 			glTranslatef(0.0, 0.11, 0.0);
 		}
-		else if (i == 5)	// cross
+		else if (i == 6)	// cross
 		{
 			// set to origin
 			glTranslatef(-2.0, 1.02, -0.1);
@@ -519,17 +533,17 @@ void display()
 			glTranslatef(0, -0.35, 0.5);
 			glRotatef(-90, 0.0, 1.0, 0.0);
 
-			glTranslatef(1.0, 0.2, 0.8);
+			glTranslatef(0.95, 0.2, 0.8);
 			glRotatef(20, 0.0, 1.0, 1.0);
 			//glTranslatef(-2.0, 1.0, 0.5);
 			//glRotatef(trcon, 0.0, 1.0, 0.0);
 		}
-		else if (i == 6)	// tombstone
+		else if (i == 7)	// tombstone
 		{
-			glTranslatef(-0.7, 0.0, -0.6);
+			glTranslatef(-0.65, 0.0, -0.6);
 			glRotatef(-30, 0.0, 1.0, 1.0);
 		}
-		else if (i == 7)
+		else if (i == 8)
 		{
 			glRotatef(30, 0.0, 1.0, 1.0);
 			glTranslatef(0.7, 0.0, 0.6);
@@ -542,12 +556,37 @@ void display()
 			glRotatef(240, 0.0, 1.0, 0.0);*/ //fence2_copy.obj
 			
 		}
-		else if (i == 8)
+		else if (i == 9)
 		{
 			//glTranslatef(-0.018, 0.11, 0.0);	//fence2_copy.obj
 			glTranslatef(0.0, 0.11, 0.0);
 		}
+		else if (i == 10)	// cross stone
+		{
+			glTranslatef(0.0, -0.11, 0.0);
+			glRotatef(-238, 0.0, 1.0, 0.0);
+			glTranslatef(0.5, 0.0, -0.98);
 
+			glTranslatef(1.0, 0.3, 0.0);
+			glRotatef(75, 0.0, 0.98, 0.0);
+		}
+		else if (i == 11)	// flying bat
+		{
+			glRotatef(-75, 0.0, 0.98, 0.0);
+			glTranslatef(-1.0, -0.3, 0.0);
+
+			glRotatef(-90, 0.0, 1.0, 0.0);
+			glTranslatef(0.0, 0.0, -0.5);
+			glRotatef(trcon * 1.5, 0.0, 1.0, 0.0);
+			glTranslatef(1.0, 1.1, 0.0);
+			glRotatef(10, 0.0, 0.0, 1.0);
+		}
+		else if (i == 12)
+		{
+			glRotatef(-10, 0.0, 0.0, 1.0);
+			glTranslatef(-1.0, -1.0, 0.0);
+			glRotatef(-trcon * 1.5, 0.0, 1.0, 0.0);
+		}
 		//else if (i == 9)	// flying bat test
 		//{
 		//	glTranslatef(1.0, 0.3, 0.0);
@@ -576,42 +615,10 @@ void display()
 		glEnable(GL_TEXTURE_2D);
 		glBegin(GL_QUADS);
 
-		if (i == 10)
-		{
-			glRotatef(trcon, 0.0, 0.0, 1.0);
-			for (int jj = 0; jj < num_faces[i]; jj = jj + 1)
-			{
-				glTexCoord2d(vcolorArr[i][mymeshArr[i][jj].T1 - 1].X, vcolorArr[i][mymeshArr[i][jj].T1 - 1].Y);
-				glVertex3f(m1[0][0] * vertexArr[i][mymeshArr[i][jj].V1 - 1].X, vertexArr[i][mymeshArr[i][jj].V1 - 1].Y, vertexArr[i][mymeshArr[i][jj].V1 - 1].Z);
-				glTexCoord2d(vcolorArr[i][mymeshArr[i][jj].T2 - 1].X, vcolorArr[i][mymeshArr[i][jj].T2 - 1].Y);
-				glVertex3f(m1[1][0] * vertexArr[i][mymeshArr[i][jj].V2 - 1].X, vertexArr[i][mymeshArr[i][jj].V2 - 1].Y, vertexArr[i][mymeshArr[i][jj].V2 - 1].Z);
-				glTexCoord2d(vcolorArr[i][mymeshArr[i][jj].T3 - 1].X, vcolorArr[i][mymeshArr[i][jj].T3 - 1].Y);
-				glVertex3f(m1[2][0] * vertexArr[i][mymeshArr[i][jj].V3 - 1].X, vertexArr[i][mymeshArr[i][jj].V3 - 1].Y, vertexArr[i][mymeshArr[i][jj].V3 - 1].Z);
-				glTexCoord2d(vcolorArr[i][mymeshArr[i][jj].T4 - 1].X, vcolorArr[i][mymeshArr[i][jj].T4 - 1].Y);
-				glVertex3f(m1[3][0] * vertexArr[i][mymeshArr[i][jj].V4 - 1].X, vertexArr[i][mymeshArr[i][jj].V4 - 1].Y, vertexArr[i][mymeshArr[i][jj].V4 - 1].Z);
-				
-				/*glTexCoord2d(vcolorArr[i][mymeshArr[i][jj].T1 - 1].X, vcolorArr[i][mymeshArr[i][jj].T1 - 1].Y);
-				glVertex3f(vertexArr[i][mymeshArr[i][jj].V1 - 1].X, vertexArr[i][mymeshArr[i][jj].V1 - 1].Y, vertexArr[i][mymeshArr[i][jj].V1 - 1].Z);
-				glTexCoord2d(vcolorArr[i][mymeshArr[i][jj].T2 - 1].X, vcolorArr[i][mymeshArr[i][jj].T2 - 1].Y);
-				glVertex3f(vertexArr[i][mymeshArr[i][jj].V2 - 1].X, vertexArr[i][mymeshArr[i][jj].V2 - 1].Y, vertexArr[i][mymeshArr[i][jj].V2 - 1].Z);
-				glTexCoord2d(vcolorArr[i][mymeshArr[i][jj].T3 - 1].X, vcolorArr[i][mymeshArr[i][jj].T3 - 1].Y);
-				glVertex3f(vertexArr[i][mymeshArr[i][jj].V3 - 1].X, vertexArr[i][mymeshArr[i][jj].V3 - 1].Y, vertexArr[i][mymeshArr[i][jj].V3 - 1].Z);
-				glTexCoord2d(vcolorArr[i][mymeshArr[i][jj].T4 - 1].X, vcolorArr[i][mymeshArr[i][jj].T4 - 1].Y);
-				if (mymeshArr[i][jj].V4)
-					glVertex3f(vertexArr[i][mymeshArr[i][jj].V4 - 1].X, vertexArr[i][mymeshArr[i][jj].V4 - 1].Y, vertexArr[i][mymeshArr[i][jj].V4 - 1].Z);*/
-			}
-		}
-		else
-		{
-			
-			DrawObj(i);
-		}
-		
+		DrawObj(i);
 		
 		glEnd();
 		
-		//glTranslatef(-0.8, -0.2, 0);
-		//glRotatef(90, 0.0, 1.0, 0.0);
 	}
 
 	glutSwapBuffers();
@@ -823,7 +830,7 @@ void SetTexture(int idx, const char* filepath)
 
 int main(int argc, char* argv[])
 {
-	numobject = 10;
+	numobject = 13;
 
 	vertexArr = new Vertex * [numobject];
 	for (int i = 0; i < numobject; i++) {
@@ -840,50 +847,38 @@ int main(int argc, char* argv[])
 
 	LoadObj(0, "assets/nightmare/spiral_hill/spiral_hill_texture.bmp",
 			   "assets/nightmare/hill/plz_copy.obj", 3.0);
+	
 	LoadObj(1, "assets/nightmare/spiral_hill/spiral_hill_texture.bmp",
 			   "assets/nightmare/hill/hill_copy.obj", 1.8);
+	
 	LoadObj(2, "assets/nightmare/moon/moon_texture.bmp",
 			   "assets/nightmare/moon/moon.obj", 2.45);		// 1.75
-	LoadObj(3, "assets/nightmare/hill/Hill_baseColor.bmp",
+	LoadObj(3, "assets/apple/mystar.bmp",	// glitter
+		"assets/nightmare/moon/square.obj", 6.0);
+	
+	LoadObj(4, "assets/nightmare/hill/Hill_baseColor.bmp",
 			   "assets/nightmare/fence/stone1.obj", 2.0);
-	LoadObj(4, "assets/nightmare/fence/Zaun.bmp",
+	LoadObj(5, "assets/nightmare/fence/Zaun.bmp",
 			   "assets/nightmare/fence/fence1.obj", 2.0);
 
-	LoadObj(5, "assets/nightmare/cross/cross_texture.bmp",
+	LoadObj(6, "assets/nightmare/cross/cross_texture.bmp",
 			   "assets/nightmare/cross/cross2.obj", 0.17);
-	LoadObj(6, "assets/nightmare/cross/tombstone_texture.bmp",
+	LoadObj(7, "assets/nightmare/cross/tombstone_texture.bmp",
 			   "assets/nightmare/cross/tombstone.obj", 0.18);
 
 	/*LoadObj(7, "assets/nightmare/hill/Hill_baseColor.bmp",
 			   "assets/nightmare/fence/stone2.obj", 1.95);
 	LoadObj(8, "assets/nightmare/fence/Zaun.bmp",
 			   "assets/nightmare/fence/fence2_copy.obj", 1.95);*/
-	LoadObj(7, "assets/nightmare/hill/Hill_baseColor.bmp",
-		"assets/nightmare/fence/stone1.obj", 1.9);
-	LoadObj(8, "assets/nightmare/fence/Zaun.bmp",
-		"assets/nightmare/fence/fence1.obj", 1.9);
-
-	/*LoadObj(7, "assets/nightmare/moon/moon_texture.bmp",
-			   "assets/nightmare/fence/stone3.obj", 1.9);*/
+	LoadObj(8, "assets/nightmare/hill/Hill_baseColor.bmp",
+			   "assets/nightmare/fence/stone1.obj", 1.9);
+	LoadObj(9, "assets/nightmare/fence/Zaun.bmp",
+			   "assets/nightmare/fence/fence1.obj", 1.9);
 
 
-	LoadObj(9, "assets/apple/glitter.bmp", "assets/bat2.obj", 0.3);
-	//LoadObj(8, "assets/apple/glitter.bmp", "assets/apple/bigapple.obj", 0.8);
-
-	/*LoadObj(5, "assets/apple/applet.bmp",
-			"assets/apple/bigapple.obj", 2.0);*/
-	/*LoadObj(6, "assets/nightmare/fence/Zaun.bmp",
-		"assets/nightmare/fence/fence2.obj", 1.7);
-
-	LoadObj(7, "assets/nightmare/cross/cross_texture.bmp", 
-			   "assets/nightmare/cross/cross2.obj", 0.17);*/
-
-	/*LoadObj(6, "assets/nightmare/hill/Hill_baseColor.bmp", "assets/bat2.obj", 0.5);
-	LoadObj(7, "assets/nightmare/hill/Hill_baseColor.bmp", "assets/nightmare/cross/cross.obj", 0.5);*/
-
-
-	//LoadObj(5, "assets/apple/applet.bmp", "assets/apple/bigapple.obj", 0, 0, 0, 0.5);
-
+	LoadObj(10, "assets/nightmare/cross/cross_texture.bmp",
+		"assets/nightmare/crossstone.obj", 0.2);
+	LoadObj(11, "assets/apple/glitter2.bmp", "assets/bat2.obj", 0.3);
 	
 
 	InitializeWindow(argc, argv);
