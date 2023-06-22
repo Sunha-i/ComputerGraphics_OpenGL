@@ -144,7 +144,7 @@ float y_min = 100000, y_max = -100000;
 float z_min = 100000, z_max = -100000;
 
 int num_vertices;
-int num_faces[15];
+int num_faces[20];
 
 int numobject;
 float normalize;	// vertex의 값들을 정규화 (box의 max line의 크기가 1이 되도록, 위치는 고려안됨)
@@ -162,4 +162,4 @@ MMesh* mymesh2;
 Vertex** vertexArr;
 Vertex** vcolorArr;
 MMesh** mymeshArr;
-GLubyte mytexels[15][2048][2048][3];
+GLubyte mytexels[20][2048][2048][3];

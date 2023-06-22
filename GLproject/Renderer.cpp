@@ -412,26 +412,6 @@ void display()
 	m1[3][2] = 0.0f;
 	m1[3][3] = 1.0f;
 	
-	// glcode3
-	/*glPointSize(3);
-	glBegin(GL_POINTS);
-	float fill_int;
-	float xx1, yy1, zz1;
-	for (register int j = 0; j < 100000; j = j + 1)
-	{
-		fill_int = (vertex[j].Z - zmin) / (zmax - zmin);
-		glColor3f(1 - fill_int, 1 - fill_int, 1 - fill_int);
-		glVertex3f(vertex[j].X, vertex[j].Y, vertex[j].Z);
-
-		glColor3f(1 - fill_int, 1 - fill_int, 1 - fill_int);
-		xx1 = m1[0][0] * (vertex[j].X - 0.3) + m1[0][1] * vertex[j].Y + m1[0][2] * vertex[j].Z;
-		yy1 = m1[1][0] * (vertex[j].X - 0.3) + m1[1][1] * vertex[j].Y + m1[1][2] * vertex[j].Z;
-		zz1 = m1[2][0] * (vertex[j].X - 0.3) + m1[2][1] * vertex[j].Y + m1[2][2] * vertex[j].Z;
-		glVertex3f(xx1, yy1, zz1);
-	}
-
-	glEnd();
-	glutSwapBuffers();*/
 
 	glEnable(GL_LIGHTING);
 	glEnable(GL_LIGHT0);
@@ -472,9 +452,14 @@ void display()
 
 	int cumRot = 0;
 
-	for (int i = 0; i < numobject; i++)
+	for (int i = 0; i < numobject + 4; i++)
 	{
-		glTexImage2D(GL_TEXTURE_2D, 0, 3, 2048, 2048, 0, GL_RGB, GL_UNSIGNED_BYTE, mytexels[i]);
+		if (i < 4)
+			glTexImage2D(GL_TEXTURE_2D, 0, 3, 2048, 2048, 0, GL_RGB, GL_UNSIGNED_BYTE, mytexels[i]);
+		else if (i >= 4 && i <= 7)
+			glTexImage2D(GL_TEXTURE_2D, 0, 3, 2048, 2048, 0, GL_RGB, GL_UNSIGNED_BYTE, mytexels[3]);
+		else if (i > 7)
+			glTexImage2D(GL_TEXTURE_2D, 0, 3, 2048, 2048, 0, GL_RGB, GL_UNSIGNED_BYTE, mytexels[i-4]);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_REPEAT);
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_NEAREST);
@@ -507,10 +492,30 @@ void display()
 			glRotatef(90, 1.0, 0.0, 0.0);
 			glRotatef(trcon/2.5, 0.0, 1.0, 0.0);
 		}
-
-		else if (i == 4)	// stone1
+		else if (i == 4)
+		{
+			glTranslatef(4.0, 0.0, 0.0);
+		}
+		else if (i == 5)
+		{
+			glTranslatef(-4.0, 0.0, 0.0);
+			glTranslatef(-4.0, 0.0, 0.0);
+		}
+		else if (i == 6)
+		{
+			glTranslatef(4.0, 0.0, 0.0);
+			glTranslatef(0.0, 0.0, 4.0);
+		}
+		else if (i == 7)
+		{
+			glTranslatef(0.0, 0.0, -4.0);
+			glTranslatef(0.0, 0.0, -4.0);
+			//glTranslatef(-4.0, 0.0, 0.0);
+		}
+		else if (i == 8)	// stone1
 		{
 			//glTranslatef(2.5, 0.0, 0.0);
+			glTranslatef(0.0, 0.0, 4.0);
 			glRotatef(-trcon/2.5 , 0.0, 1.0, 0.0);
 			glRotatef(-90, 1.0, 0.0, 0.0);
 			glTranslatef(0.0, 0.0, 1.0);
@@ -519,11 +524,11 @@ void display()
 			glRotatef(285, 0.05, 1.0, 0.0);
 			glTranslatef(2.0, -1.13, 0.1);
 		}
-		else if (i == 5)	// fence1
+		else if (i == 9)	// fence1
 		{
 			glTranslatef(0.0, 0.11, 0.0);
 		}
-		else if (i == 6)	// cross
+		else if (i == 10)	// cross
 		{
 			// set to origin
 			glTranslatef(-2.0, 1.02, -0.1);
@@ -538,12 +543,12 @@ void display()
 			//glTranslatef(-2.0, 1.0, 0.5);
 			//glRotatef(trcon, 0.0, 1.0, 0.0);
 		}
-		else if (i == 7)	// tombstone
+		else if (i == 11)	// tombstone
 		{
 			glTranslatef(-0.65, 0.0, -0.6);
 			glRotatef(-30, 0.0, 1.0, 1.0);
 		}
-		else if (i == 8)
+		else if (i == 12)
 		{
 			glRotatef(30, 0.0, 1.0, 1.0);
 			glTranslatef(0.7, 0.0, 0.6);
@@ -556,24 +561,24 @@ void display()
 			glRotatef(240, 0.0, 1.0, 0.0);*/ //fence2_copy.obj
 			
 		}
-		else if (i == 9)
+		else if (i == 13)
 		{
 			//glTranslatef(-0.018, 0.11, 0.0);	//fence2_copy.obj
 			glTranslatef(0.0, 0.11, 0.0);
 		}
-		else if (i == 10)	// cross stone
+		else if (i == 14)	// cross stone
 		{
 			glTranslatef(0.0, -0.11, 0.0);
 			glRotatef(-238, 0.0, 1.0, 0.0);
 			glTranslatef(0.5, 0.0, -0.98);
 
-			glTranslatef(1.0, 0.3, 0.0);
+			glTranslatef(1.1, 0.3, 0.0);
 			glRotatef(75, 0.0, 0.98, 0.0);
 		}
-		else if (i == 11)	// flying bat
+		else if (i == 15)	// flying bat
 		{
 			glRotatef(-75, 0.0, 0.98, 0.0);
-			glTranslatef(-1.0, -0.3, 0.0);
+			glTranslatef(-1.1, -0.3, 0.0);
 
 			glRotatef(-90, 0.0, 1.0, 0.0);
 			glTranslatef(0.0, 0.0, -0.5);
@@ -581,42 +586,76 @@ void display()
 			glTranslatef(1.0, 1.1, 0.0);
 			glRotatef(10, 0.0, 0.0, 1.0);
 		}
-		else if (i == 12)
+		else if (i == 16)	// 12. cross
 		{
 			glRotatef(-10, 0.0, 0.0, 1.0);
-			glTranslatef(-1.0, -1.0, 0.0);
+			glTranslatef(-1.0, -1.1, 0.0);
 			glRotatef(-trcon * 1.5, 0.0, 1.0, 0.0);
-		}
-		//else if (i == 9)	// flying bat test
-		//{
-		//	glTranslatef(1.0, 0.3, 0.0);
-		//	glRotatef(30, 1.0, 0.0, 0.0);
-		//	glRotatef(trcon * 1.5, 0.0, 1.0, 0.0);
-		//	glTranslatef(1.0, 1.0, 0.0);
-		//}
-		//else if (i == 7)	
-		//{
-		//	
-		//}
-		//else if (i == 8)
-		//{
-		//	trcon = trcon + 1;
-		//}
-		/*else if (i == 6)	
-		{
+			glTranslatef(0.0, 0.0, 0.4);
 			glRotatef(90, 0.0, 1.0, 0.0);
-			glTranslatef(0.0, 0.0, 1.0);
+
+			glTranslatef(-1.0, 0.12, 0.7);
 		}
-		else if (i == 7)
+		else if (i == 17)
 		{
-			glTranslatef(2.0, 0.0, 0.0);
-		}*/
+			glTranslatef(1.0, -0.12, -0.7);
+			
+			glRotatef(85, 0.0, 1.0, 0.0);
+			glTranslatef(-0.1, 0.033, 0.9);
+
+			/*glRotatef(-20, 0.0, 1.0, 0.0);
+			glTranslatef(0.9, 0.22, -0.2);*/ //fence2
+		}
+		else if (i == 18)
+		{
+			glTranslatef(0.0, 0.11, 0.0);
+		}
+		else if (i == 19)
+		{
+			glTranslatef(0.0, -0.11, 0.0);
+			glTranslatef(0.0, -0.05, -0.8);
+			glRotatef(-90, 0.0, 1.0, 0.0);
+
+			glTranslatef(-0.5, 0.03, 0.5);
+		}
+		else if (i == 20)
+		{
+			glTranslatef(0.2, 0.0, 0.1);
+			glRotatef(-30, 0.0, 1.0, 0.0);
+		}
+		else if (i == 21)
+		{
+			glTranslatef(-0.2, 0.02, 0.25);
+		}
+		else if (i == 22)
+		{
+			glTranslatef(0.2, -0.02, -0.25);
+			glRotatef(30, 0.0, 1.0, 0.0);
+			glTranslatef(0.3, -0.03, -0.6);
+
+			glRotatef(18, 0.0, 0.0, 1.0);
+			glTranslatef(0.68, 0.005, -0.7);
+		}
+		else if (i == 23)
+		{
+			glTranslatef(-0.68, -0.005, 0.7);
+			glRotatef(-18, 0.0, 0.0, 1.0);
+
+			glTranslatef(-0.7, -0.055, -0.6);
+			glRotatef(-60, 0.0, 1.0, 0.0);
+		}
+		
 		
 		glEnable(GL_TEXTURE_2D);
 		glBegin(GL_QUADS);
 
-		DrawObj(i);
-		
+		if (i < 4)
+			DrawObj(i);
+		else if (i >= 4 && i <= 7)	// draw star	
+			DrawObj(3);
+		else if (i > 7)
+			DrawObj(i - 4);
+
 		glEnd();
 		
 	}
@@ -830,7 +869,7 @@ void SetTexture(int idx, const char* filepath)
 
 int main(int argc, char* argv[])
 {
-	numobject = 13;
+	numobject = 20;
 
 	vertexArr = new Vertex * [numobject];
 	for (int i = 0; i < numobject; i++) {
@@ -846,15 +885,15 @@ int main(int argc, char* argv[])
 	}
 
 	LoadObj(0, "assets/nightmare/spiral_hill/spiral_hill_texture.bmp",
-			   "assets/nightmare/hill/plz_copy.obj", 3.0);
+			   "assets/nightmare/spiral_hill/base.obj", 3.0);
 	
 	LoadObj(1, "assets/nightmare/spiral_hill/spiral_hill_texture.bmp",
-			   "assets/nightmare/hill/hill_copy.obj", 1.8);
+			   "assets/nightmare/spiral_hill/hill.obj", 1.8);
 	
 	LoadObj(2, "assets/nightmare/moon/moon_texture.bmp",
 			   "assets/nightmare/moon/moon.obj", 2.45);		// 1.75
 	LoadObj(3, "assets/apple/mystar.bmp",	// glitter
-		"assets/nightmare/moon/square.obj", 6.0);
+			   "assets/nightmare/moon/square.obj", 6.0);
 	
 	LoadObj(4, "assets/nightmare/hill/Hill_baseColor.bmp",
 			   "assets/nightmare/fence/stone1.obj", 2.0);
@@ -866,21 +905,34 @@ int main(int argc, char* argv[])
 	LoadObj(7, "assets/nightmare/cross/tombstone_texture.bmp",
 			   "assets/nightmare/cross/tombstone.obj", 0.18);
 
-	/*LoadObj(7, "assets/nightmare/hill/Hill_baseColor.bmp",
-			   "assets/nightmare/fence/stone2.obj", 1.95);
-	LoadObj(8, "assets/nightmare/fence/Zaun.bmp",
-			   "assets/nightmare/fence/fence2_copy.obj", 1.95);*/
 	LoadObj(8, "assets/nightmare/hill/Hill_baseColor.bmp",
 			   "assets/nightmare/fence/stone1.obj", 1.9);
 	LoadObj(9, "assets/nightmare/fence/Zaun.bmp",
 			   "assets/nightmare/fence/fence1.obj", 1.9);
 
-
 	LoadObj(10, "assets/nightmare/cross/cross_texture.bmp",
-		"assets/nightmare/crossstone.obj", 0.2);
-	LoadObj(11, "assets/apple/glitter2.bmp", "assets/bat2.obj", 0.3);
-	
+				"assets/nightmare/cross/crossstone.obj", 0.2);
+	LoadObj(11, "assets/apple/glitter2.bmp", "assets/nightmare/bat/bat2.obj", 0.3);
+	LoadObj(12, "assets/nightmare/cross/cross_texture.bmp",
+				"assets/nightmare/cross/cross2.obj", 0.17);
 
+	LoadObj(13, "assets/nightmare/hill/Hill_baseColor.bmp",
+				"assets/nightmare/fence/stone3_copy.obj", 1.9);
+	LoadObj(14, "assets/nightmare/fence/Zaun.bmp",
+				"assets/nightmare/fence/fence3_copy.obj", 1.9);
+	LoadObj(15, "assets/nightmare/pumpkin/pumpkin2.bmp",
+				"assets/nightmare/pumpkin/newnewpumpkin.obj", 0.2);
+	LoadObj(16, "assets/nightmare/pumpkin/pumpkin1.bmp",
+				"assets/nightmare/pumpkin/newnewpumpkin.obj", 0.15);
+	LoadObj(17, "assets/nightmare/pumpkin/pumpkin3.bmp",
+				"assets/nightmare/pumpkin/newnewpumpkin.obj", 0.1);
+
+	LoadObj(18, "assets/nightmare/cross/cross_texture.bmp",
+				"assets/nightmare/cross/cross2.obj", 0.17);
+	LoadObj(19, "assets/nightmare/cross/cross_texture.bmp",
+				"assets/nightmare/cross/crossstone.obj", 0.2);
+
+	
 	InitializeWindow(argc, argv);
 
 	display();
