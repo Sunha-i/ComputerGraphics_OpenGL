@@ -1,5 +1,5 @@
-# OpenGL
-> <samp>[2023-1] Computer Graphics final project</samp> ➰<code>2023.6.2 ~ 2023.6.22</code>  
+# <img src="https://github.com/Sunha-i/ComputerGraphics_OpenGL/assets/74592552/f7f6573e-eb8c-4c3f-ad31-557f864006f3" style="margin-bottom: -1%; margin-left: 1px; margin-right:-1px; width: 100px;"> Renderer
+> <samp>[2023-1] Computer Graphics final project ✘</samp><code>2023.6.2 ~ 2023.6.22</code>  
 > <samp>load obj, set transform, etc.</samp>
 
 ## Scene 🎬
